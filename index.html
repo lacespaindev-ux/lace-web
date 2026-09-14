@@ -159,7 +159,8 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 .verticals { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); }
 @media (max-width: 800px) { .verticals { grid-template-columns: 1fr; } }
 .v-card { background: var(--surface); padding: 28px 26px; display: flex; flex-direction: column; gap: 12px; }
-.v-card .mark { width: 7px; height: 7px; background: var(--gold); display: inline-block; }
+.v-card .icon { width: 26px; height: 26px; color: var(--gold); }
+.v-card .icon svg { width: 100%; height: 100%; display: block; }
 .v-card h3 { font-size: 1.05rem; font-weight: 600; }
 .v-card p { color: var(--ink-muted); font-size: .92rem; margin: 0; }
 
@@ -293,17 +294,17 @@ footer {
     </div>
     <div class="verticals">
       <div class="v-card">
-        <span class="mark"></span>
+        <span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><line x1="20" y1="4" x2="8.12" y2="15.88"/><line x1="14.47" y1="14.48" x2="20" y2="20"/><line x1="8.12" y1="8.12" x2="12" y2="12"/></svg></span>
         <h3>Barberías y peluquerías</h3>
         <p>Confirmación y recordatorio automático de cada cita, para que los huecos cancelados a última hora se puedan volver a ocupar.</p>
       </div>
       <div class="v-card">
-        <span class="mark"></span>
+        <span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2c.35 4.1 1.85 6.5 5.6 7.6-3.75 1.1-5.25 3.5-5.6 7.6-.35-4.1-1.85-6.5-5.6-7.6C10.15 8.5 11.65 6.1 12 2z"/><circle cx="19.3" cy="5.2" r="1.15"/><circle cx="4.8" cy="18.6" r="1.15"/></svg></span>
         <h3>Clínicas estéticas</h3>
         <p>Recordatorio 24h antes de cada sesión y respuesta automática a lo que preguntan todo el día: precio, disponibilidad, duración.</p>
       </div>
       <div class="v-card">
-        <span class="mark"></span>
+        <span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-4.7 7.6 8.5 8.5 0 0 1-8.6-.4L3 21l1.9-4.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 8.6-8.5h.4a8.48 8.48 0 0 1 8 8v.5z"/></svg></span>
         <h3>Redes sociales y cualquier otro negocio</h3>
         <p>Publicaciones que salen solas, respuestas automáticas por WhatsApp o Instagram, o cualquier tarea manual que se repita cada semana.</p>
       </div>
