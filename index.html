@@ -149,6 +149,21 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 .bubble.in { background: var(--surface); border: 1px solid var(--line); border-bottom-left-radius: 3px; }
 .bubble.out { background: var(--thread); color: #fbf3ee; margin-left: auto; border-bottom-right-radius: 3px; }
 .bubble .t { display: block; font-family: "Space Mono", monospace; font-size: .64rem; opacity: .65; margin-top: 3px; }
+.demo-form { display: flex; gap: 8px; margin-top: 4px; }
+.demo-form input { flex: 1; font-family: inherit; font-size: .82rem; padding: 8px 13px; border-radius: 20px; border: 1px solid var(--line); background: var(--surface-raised); color: var(--ink); }
+.demo-form input:focus { outline: 2px solid var(--gold); outline-offset: 1px; }
+.demo-form button { width: 34px; height: 34px; flex-shrink: 0; border-radius: 50%; border: none; background: var(--thread); color: #fbf3ee; font-size: 1rem; cursor: pointer; }
+.demo-form button:hover { background: var(--thread-strong); }
+.demo-chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+.chip { font-family: "Space Mono", monospace; font-size: .68rem; padding: 5px 10px; border-radius: 20px; border: 1px solid var(--line); background: var(--surface); color: var(--ink-muted); cursor: pointer; }
+.chip:hover { border-color: var(--thread); color: var(--thread-strong); }
+.bubble.typing { display: flex; gap: 4px; align-items: center; padding: 10px 14px; }
+.bubble.typing span { width: 5px; height: 5px; border-radius: 50%; background: var(--ink-muted); display: inline-block; animation: blink 1.2s infinite; }
+.bubble.typing span:nth-child(2) { animation-delay: .2s; }
+.bubble.typing span:nth-child(3) { animation-delay: .4s; }
+@keyframes blink { 0%, 80%, 100% { opacity: .25; } 40% { opacity: 1; } }
+.demo-note { text-align: center; font-size: .78rem; color: var(--ink-muted); margin-top: 12px; font-style: italic; }
+
 
 /* SECTION HEADS */
 .section-head { max-width: 58ch; margin-bottom: 44px; }
@@ -276,10 +291,19 @@ footer {
           </div>
           <div class="bubble in">Hola! ¿Tenéis hueco mañana por la tarde?<span class="t">14:02</span></div>
           <div class="bubble out">Tengo libre a las 18:00 o a las 19:30, ¿cuál te viene mejor?<span class="t">14:02</span></div>
-          <div class="bubble in">18:00 perfecto<span class="t">14:03</span></div>
-          <div class="bubble out">Cita confirmada. Te escribo un recordatorio unas horas antes 👍<span class="t">14:03</span></div>
-          <div class="bubble out">Recordatorio: tu cita es hoy a las 18:00. Responde OK para confirmar.<span class="t">mañana</span></div>
+          <div id="demoLog"></div>
+          <form id="demoForm" class="demo-form" autocomplete="off">
+            <input id="demoInput" type="text" placeholder="Escribe tu pregunta…" aria-label="Escribe tu pregunta para el asistente de ejemplo">
+            <button type="submit" aria-label="Enviar">→</button>
+          </form>
+          <div class="demo-chips">
+            <button type="button" class="chip" data-q="¿Cuánto cuesta un corte?">¿Precio?</button>
+            <button type="button" class="chip" data-q="¿Tenéis hueco el sábado?">¿Hueco el sábado?</button>
+            <button type="button" class="chip" data-q="¿Dónde estáis?">¿Dónde estáis?</button>
+            <button type="button" class="chip" data-q="Quiero hablar con una persona">Hablar con alguien</button>
+          </div>
         </div>
+        <p class="demo-note">👆 Esto no es una foto — pruébalo, es un asistente de ejemplo respondiendo de verdad</p>
       </div>
     </div>
   </section>
@@ -421,4 +445,80 @@ footer {
   document.getElementById("year").textContent = new Date().getFullYear();
 </script>
 
+<script>
+(function(){
+  var log = document.getElementById('demoLog');
+  var form = document.getElementById('demoForm');
+  var input = document.getElementById('demoInput');
+  var chips = document.querySelectorAll('.chip');
+  if (!log || !form || !input) return;
+
+  var FAQ = [
+    { kws: ['precio','cuesta','cuánto','cuanto','tarifa','vale'], a: 'Un corte normal son 15€, corte + barba 22€. ¿Te reservo hueco?' },
+    { kws: ['hueco','cita','reserva','sábado','sabado','domingo','lunes','martes','miércoles','miercoles','jueves','viernes','mañana','tarde','disponib'], a: 'Tengo libre mañana a las 18:00 o a las 19:30 — ¿cuál te viene mejor?' },
+    { kws: ['dónde','donde','dirección','direccion','ubicaci','llegar'], a: 'Estamos en Calle Ejemplo 12, junto a la plaza mayor. Hay parking justo al lado 🚗' },
+    { kws: ['cancelar','cambiar','anular','mover'], a: 'Sin problema — dime el día de tu cita y te la cambio o la cancelo.' },
+    { kws: ['persona','humano','alguien','de verdad'], a: 'Claro, esto es solo la demo — para hablar con Rubén de verdad, escríbele por WhatsApp real con el botón de arriba 👆' },
+    { kws: ['horario','abrís','abris','abierto','cerráis','cerrais'], a: 'Abrimos de martes a sábado, de 10:00 a 20:00. Domingos y lunes cerrado.' }
+  ];
+  var FALLBACK = 'Esa no la tengo en el guion de la demo 😅 — por WhatsApp real te la contesto en el momento (botón de arriba).';
+
+  function timeNow(){
+    var d = new Date();
+    var h = String(d.getHours()).padStart(2,'0');
+    var m = String(d.getMinutes()).padStart(2,'0');
+    return h + ':' + m;
+  }
+
+  function addBubble(text, cls){
+    var div = document.createElement('div');
+    div.className = 'bubble ' + cls;
+    div.textContent = text;
+    var t = document.createElement('span');
+    t.className = 't';
+    t.textContent = timeNow();
+    div.appendChild(t);
+    log.appendChild(div);
+    div.scrollIntoView({behavior:'smooth', block:'nearest'});
+    return div;
+  }
+
+  function reply(q){
+    var lower = q.toLowerCase();
+    for (var i = 0; i < FAQ.length; i++){
+      for (var j = 0; j < FAQ[i].kws.length; j++){
+        if (lower.indexOf(FAQ[i].kws[j]) !== -1) return FAQ[i].a;
+      }
+    }
+    return FALLBACK;
+  }
+
+  function ask(q){
+    q = (q || '').trim();
+    if (!q) return;
+    addBubble(q, 'in');
+    input.value = '';
+    var typing = document.createElement('div');
+    typing.className = 'bubble out typing';
+    typing.innerHTML = '<span></span><span></span><span></span>';
+    log.appendChild(typing);
+    typing.scrollIntoView({behavior:'smooth', block:'nearest'});
+    setTimeout(function(){
+      typing.remove();
+      addBubble(reply(q), 'out');
+    }, 650 + Math.random() * 400);
+  }
+
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    ask(input.value);
+  });
+
+  chips.forEach(function(chip){
+    chip.addEventListener('click', function(){
+      ask(chip.getAttribute('data-q'));
+    });
+  });
+})();
+</script>
 </body></html>
