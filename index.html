@@ -291,22 +291,21 @@ footer {
               <div class="sub">en línea</div>
             </div>
           </div>
-          <div class="bubble in">Hola! ¿Tenéis hueco mañana por la tarde?<span class="t">14:02</span></div>
-          <div class="bubble out">Tengo libre a las 18:00 o a las 19:30, ¿cuál te viene mejor?<span class="t">14:02</span></div>
+          <div class="bubble out">¡Hola! Soy del equipo de LaceDev, ¿qué necesitas?<span class="t">ahora</span></div>
           <div id="demoLog"></div>
           <form id="demoForm" class="demo-form" autocomplete="off">
-            <input id="demoInput" type="text" placeholder="Escribe tu pregunta…" aria-label="Escribe tu pregunta para el asistente de ejemplo">
+            <input id="demoInput" type="text" placeholder="Escribe tu pregunta…" aria-label="Escribe tu pregunta para el asistente de LaceDev">
             <button type="submit" aria-label="Enviar">→</button>
           </form>
           <div class="demo-chips">
-            <button type="button" class="chip" data-q="¿Cuánto cuesta un corte?">¿Precio?</button>
-            <button type="button" class="chip" data-q="¿Tenéis hueco el sábado?">¿Hueco el sábado?</button>
-            <button type="button" class="chip" data-q="¿Dónde estáis?">¿Dónde estáis?</button>
-            <button type="button" class="chip" data-q="Quiero hablar con una persona">Hablar con alguien</button>
+            <button type="button" class="chip" data-q="¿Qué automatizáis exactamente?">¿Qué automatizáis?</button>
+            <button type="button" class="chip" data-q="¿Cuánto cuesta un proyecto?">¿Precio?</button>
+            <button type="button" class="chip" data-q="¿Cómo funciona esto por dentro?">¿Cómo funciona?</button>
+            <button type="button" class="chip" data-q="Quiero hablar con Rubén">Hablar con Rubén</button>
           </div>
         </div>
         </div>
-        <p class="demo-note">👆 Esto no es una foto — pruébalo, es un asistente de ejemplo respondiendo de verdad</p>
+        <p class="demo-note">👆 Pregúntale lo que quieras — responde una IA real, en directo, con contexto de Lace</p>
       </div>
     </div>
   </section>
@@ -456,15 +455,12 @@ footer {
   var chips = document.querySelectorAll('.chip');
   if (!log || !form || !input) return;
 
-  var FAQ = [
-    { kws: ['precio','cuesta','cuánto','cuanto','tarifa','vale'], a: 'Un corte normal son 15€, corte + barba 22€. ¿Te reservo hueco?' },
-    { kws: ['hueco','cita','reserva','sábado','sabado','domingo','lunes','martes','miércoles','miercoles','jueves','viernes','mañana','tarde','disponib'], a: 'Tengo libre mañana a las 18:00 o a las 19:30 — ¿cuál te viene mejor?' },
-    { kws: ['dónde','donde','dirección','direccion','ubicaci','llegar'], a: 'Estamos en Calle Ejemplo 12, junto a la plaza mayor. Hay parking justo al lado 🚗' },
-    { kws: ['cancelar','cambiar','anular','mover'], a: 'Sin problema — dime el día de tu cita y te la cambio o la cancelo.' },
-    { kws: ['persona','humano','alguien','de verdad'], a: 'Claro, esto es solo la demo — para hablar con Rubén de verdad, escríbele por WhatsApp real con el botón de arriba 👆' },
-    { kws: ['horario','abrís','abris','abierto','cerráis','cerrais'], a: 'Abrimos de martes a sábado, de 10:00 a 20:00. Domingos y lunes cerrado.' }
-  ];
-  var FALLBACK = 'Esa no la tengo en el guion de la demo 😅 — por WhatsApp real te la contesto en el momento (botón de arriba).';
+  // Sustituye esto por la URL real de tu Worker tras "wrangler deploy"
+  // (algo como https://lace-chat-proxy.TU-SUBDOMINIO.workers.dev)
+  var PROXY_URL = 'https://lace-chat-proxy.REEMPLAZAR.workers.dev';
+
+  var history = [];
+  var FALLBACK = 'Perdona, ahora mismo no puedo pensarlo bien — escríbeme por WhatsApp (+34 722 197 596) y te contesto en el momento.';
 
   function timeNow(){
     var d = new Date();
@@ -486,30 +482,36 @@ footer {
     return div;
   }
 
-  function reply(q){
-    var lower = q.toLowerCase();
-    for (var i = 0; i < FAQ.length; i++){
-      for (var j = 0; j < FAQ[i].kws.length; j++){
-        if (lower.indexOf(FAQ[i].kws[j]) !== -1) return FAQ[i].a;
-      }
-    }
-    return FALLBACK;
-  }
-
   function ask(q){
     q = (q || '').trim();
     if (!q) return;
     addBubble(q, 'in');
     input.value = '';
+    history.push({ role: 'user', content: q });
+
     var typing = document.createElement('div');
     typing.className = 'bubble out typing';
     typing.innerHTML = '<span></span><span></span><span></span>';
     log.appendChild(typing);
     typing.scrollIntoView({behavior:'smooth', block:'nearest'});
-    setTimeout(function(){
-      typing.remove();
-      addBubble(reply(q), 'out');
-    }, 650 + Math.random() * 400);
+
+    fetch(PROXY_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ messages: history.slice(-8) }),
+    })
+      .then(function(res){ return res.ok ? res.json() : null; })
+      .then(function(data){
+        var reply = (data && data.reply) ? data.reply : FALLBACK;
+        typing.remove();
+        addBubble(reply, 'out');
+        history.push({ role: 'assistant', content: reply });
+      })
+      .catch(function(){
+        typing.remove();
+        addBubble(FALLBACK, 'out');
+        history.push({ role: 'assistant', content: FALLBACK });
+      });
   }
 
   form.addEventListener('submit', function(e){
