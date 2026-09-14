@@ -1,0 +1,420 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1"><style>:root{color-scheme:light}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}</style>
+<title>Lace</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500;1,9..144,600&family=Archivo:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{color-scheme:light}body{margin:0;padding:0}
+:root {
+  --paper: #efeade;
+  --surface: #f9f6ee;
+  --surface-raised: #ffffff;
+  --ink: #211d17;
+  --ink-muted: #746b58;
+  --line: #ddd5bf;
+  --thread: #7c3040;
+  --thread-strong: #5c2130;
+  --thread-soft: #f0dfe1;
+  --gold: #9c7a3a;
+  --gold-soft: #eee3c9;
+  --shadow: 0 1px 2px rgba(33,29,23,.05), 0 20px 40px -28px rgba(33,29,23,.35);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #18150f;
+    --surface: #211c15;
+    --surface-raised: #262019;
+    --ink: #f1ecdf;
+    --ink-muted: #a99e88;
+    --line: #382f22;
+    --thread: #cf7c86;
+    --thread-strong: #e29aa2;
+    --thread-soft: #3a2229;
+    --gold: #cba766;
+    --gold-soft: #392f1c;
+    --shadow: 0 1px 2px rgba(0,0,0,.4), 0 20px 40px -28px rgba(0,0,0,.6);
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #18150f;
+  --surface: #211c15;
+  --surface-raised: #262019;
+  --ink: #f1ecdf;
+  --ink-muted: #a99e88;
+  --line: #382f22;
+  --thread: #cf7c86;
+  --thread-strong: #e29aa2;
+  --thread-soft: #3a2229;
+  --gold: #cba766;
+  --gold-soft: #392f1c;
+  --shadow: 0 1px 2px rgba(0,0,0,.4), 0 20px 40px -28px rgba(0,0,0,.6);
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: "Archivo", system-ui, sans-serif;
+  padding: 0 22px;
+  line-height: 1.55;
+}
+h1, h2, h3 { font-family: "Fraunces", Georgia, serif; text-wrap: balance; margin: 0; font-weight: 600; }
+em { font-style: italic; color: var(--thread); }
+a { color: inherit; }
+.mono { font-family: "Space Mono", ui-monospace, monospace; }
+::selection { background: var(--thread-soft); color: var(--thread-strong); }
+
+.container { max-width: 1040px; margin: 0 auto; }
+section { padding-block: 76px; position: relative; }
+@media (max-width: 640px) { section { padding-block: 52px; } }
+
+/* stitch divider */
+.stitch {
+  height: 1px;
+  background-image: repeating-linear-gradient(90deg, var(--gold) 0 10px, transparent 10px 20px);
+  opacity: .55;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .hoop { animation: spin 90s linear infinite; }
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* NAV */
+nav.top {
+  position: sticky; top: 0; z-index: 40;
+  background: color-mix(in srgb, var(--paper) 88%, transparent);
+  backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--line);
+  margin: 0 -22px; padding: 0 22px;
+}
+nav.top .container { display: flex; align-items: center; justify-content: space-between; padding-block: 16px; }
+.logo { display: flex; align-items: baseline; gap: 2px; font-family: "Fraunces", serif; font-weight: 600; font-style: italic; font-size: 1.35rem; text-decoration: none; color: var(--ink); }
+.logo .dot { font-style: normal; color: var(--thread); }
+.navlinks { display: flex; gap: 28px; font-size: .92rem; color: var(--ink-muted); }
+.navlinks a { text-decoration: none; }
+.navlinks a:hover { color: var(--ink); }
+@media (max-width: 720px) { .navlinks { display: none; } }
+.btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  border-radius: 3px; padding: 11px 20px;
+  font-weight: 600; font-size: .92rem; text-decoration: none;
+  border: 1px solid transparent; cursor: pointer;
+}
+.btn-primary { background: var(--thread); color: #fbf3ee; box-shadow: var(--shadow); }
+.btn-primary:hover { background: var(--thread-strong); }
+.btn-ghost { background: transparent; border-color: var(--line); color: var(--ink); }
+.btn-ghost:hover { border-color: var(--thread); color: var(--thread); }
+a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible { outline: 2px solid var(--thread); outline-offset: 2px; }
+
+/* HERO */
+.hero { padding-top: 64px; }
+.hero-grid { display: grid; grid-template-columns: 1.15fr 1fr; gap: 56px; align-items: center; }
+@media (max-width: 860px) { .hero-grid { grid-template-columns: 1fr; } }
+.eyebrow {
+  display: inline-flex; align-items: center; gap: 9px;
+  font-family: "Space Mono", monospace; font-size: .75rem; letter-spacing: .06em; text-transform: uppercase;
+  color: var(--thread-strong); margin-bottom: 22px;
+}
+.eyebrow::before { content: ""; width: 16px; height: 1px; background: var(--gold); display: inline-block; }
+.hero h1 { font-size: clamp(2.2rem, 4.4vw, 3.4rem); font-weight: 600; letter-spacing: -.01em; line-height: 1.08; }
+.hero .lede { font-size: 1.1rem; color: var(--ink-muted); max-width: 48ch; margin-top: 22px; }
+.hero-cta { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 32px; }
+.hero-badges { display: flex; flex-wrap: wrap; gap: 20px 32px; margin-top: 40px; padding-top: 28px; border-top: 1px solid var(--line); }
+.hero-badges .b { font-size: .84rem; color: var(--ink-muted); max-width: 26ch; flex: 1 1 180px; }
+.hero-badges .b strong { display: block; font-family: "Space Mono", monospace; color: var(--thread-strong); font-size: .74rem; text-transform: uppercase; letter-spacing: .03em; margin-bottom: 4px; }
+
+/* HERO PHONE */
+.hero-visual { position: relative; display: flex; justify-content: center; }
+.hoop { position: absolute; width: 360px; height: 360px; opacity: .5; }
+.phone {
+  position: relative;
+  background: var(--surface-raised);
+  border: 1px solid var(--line);
+  border-radius: 22px;
+  padding: 18px;
+  box-shadow: var(--shadow);
+  width: 100%; max-width: 300px;
+}
+.phone-head { display: flex; align-items: center; gap: 10px; padding: 2px 4px 14px; border-bottom: 1px solid var(--line); margin-bottom: 14px; }
+.phone-head .avatar { width: 32px; height: 32px; border-radius: 50%; background: var(--thread-soft); color: var(--thread-strong); display: flex; align-items: center; justify-content: center; font-weight: 700; font-family: "Fraunces", serif; font-style: italic; font-size: .85rem; }
+.phone-head .name { font-weight: 600; font-size: .9rem; }
+.phone-head .sub { font-size: .74rem; color: var(--ink-muted); }
+.bubble { max-width: 84%; padding: 8px 12px; border-radius: 12px; font-size: .84rem; margin-bottom: 7px; line-height: 1.4; }
+.bubble.in { background: var(--surface); border: 1px solid var(--line); border-bottom-left-radius: 3px; }
+.bubble.out { background: var(--thread); color: #fbf3ee; margin-left: auto; border-bottom-right-radius: 3px; }
+.bubble .t { display: block; font-family: "Space Mono", monospace; font-size: .64rem; opacity: .65; margin-top: 3px; }
+
+/* SECTION HEADS */
+.section-head { max-width: 58ch; margin-bottom: 44px; }
+.section-head h2 { font-size: clamp(1.5rem, 2.8vw, 2rem); }
+.section-head p { color: var(--ink-muted); margin-top: 12px; font-size: 1.02rem; }
+
+/* VERTICALS */
+.verticals { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); }
+@media (max-width: 800px) { .verticals { grid-template-columns: 1fr; } }
+.v-card { background: var(--surface); padding: 28px 26px; display: flex; flex-direction: column; gap: 12px; }
+.v-card .mark { width: 7px; height: 7px; background: var(--gold); display: inline-block; }
+.v-card h3 { font-size: 1.05rem; font-weight: 600; }
+.v-card p { color: var(--ink-muted); font-size: .92rem; margin: 0; }
+
+/* PROJECTS */
+.projects { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+@media (max-width: 760px) { .projects { grid-template-columns: 1fr; } }
+.p-card { border: 1px solid var(--line); background: var(--surface); padding: 26px; display: flex; flex-direction: column; gap: 10px; }
+.p-card .tag { font-family: "Space Mono", monospace; font-size: .7rem; color: var(--thread-strong); background: var(--thread-soft); align-self: flex-start; padding: 3px 10px; border-radius: 2px; }
+.p-card h3 { font-size: 1.15rem; }
+.p-card p { color: var(--ink-muted); font-size: .9rem; margin: 0; }
+.p-card .meta { font-size: .78rem; color: var(--ink-muted); margin-top: 6px; font-family: "Space Mono", monospace; }
+
+/* PROCESS */
+.process { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; border-top: 1px solid var(--line); }
+@media (max-width: 800px) { .process { grid-template-columns: 1fr; } }
+.step { padding: 22px 20px 0 0; border-right: 1px solid var(--line); }
+.step:last-child { border-right: none; }
+@media (max-width: 800px) { .step { border-right: none; border-bottom: 1px solid var(--line); padding: 20px 0; } }
+.step .num { font-family: "Space Mono", monospace; color: var(--gold); font-size: .82rem; }
+.step h3 { font-size: 1rem; margin-top: 10px; font-weight: 600; }
+.step p { color: var(--ink-muted); font-size: .87rem; margin-top: 6px; }
+
+/* PRICING */
+.pricing { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+@media (max-width: 800px) { .pricing { grid-template-columns: 1fr; } }
+.price-card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  padding: 30px 26px;
+  display: flex; flex-direction: column; gap: 14px;
+}
+.price-card.featured { border: 1px dashed var(--thread); position: relative; }
+.price-card.featured::before { content: "más habitual"; position: absolute; top: -11px; left: 24px; background: var(--paper); padding: 0 8px; font-family: "Space Mono", monospace; font-size: .68rem; color: var(--thread-strong); text-transform: uppercase; letter-spacing: .04em; }
+.price-card h3 { font-size: .98rem; color: var(--ink-muted); font-weight: 600; }
+.price-card .amount { font-family: "Fraunces", serif; font-weight: 600; font-size: 1.9rem; font-variant-numeric: tabular-nums; }
+.price-card .amount span { font-size: .9rem; color: var(--ink-muted); font-family: "Archivo", sans-serif; font-weight: 400; }
+.price-card p.desc { color: var(--ink-muted); font-size: .9rem; margin: 0; flex: 1; }
+.price-card .roi { font-size: .85rem; color: var(--ink-muted); border-top: 1px solid var(--line); padding-top: 12px; }
+.price-card .roi a { color: var(--thread-strong); font-weight: 600; text-decoration: none; }
+
+/* CONTACT */
+.contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+@media (max-width: 800px) { .contact-grid { grid-template-columns: 1fr; } }
+.contact-card { background: var(--surface); border: 1px solid var(--line); padding: 30px; }
+.contact-line { display: flex; align-items: center; gap: 12px; padding: 13px 0; border-bottom: 1px solid var(--line); text-decoration: none; }
+.contact-line:last-child { border-bottom: none; }
+.contact-line .lbl { font-family: "Space Mono", monospace; font-size: .7rem; color: var(--ink-muted); text-transform: uppercase; letter-spacing: .04em; }
+.contact-line .val { font-weight: 600; }
+
+form.contact-form { display: flex; flex-direction: column; gap: 14px; }
+.field { display: flex; flex-direction: column; gap: 6px; }
+.field label { font-size: .8rem; color: var(--ink-muted); }
+.field input, .field textarea {
+  font-family: inherit; font-size: .95rem; padding: 11px 13px;
+  border-radius: 3px; border: 1px solid var(--line); background: var(--surface-raised); color: var(--ink);
+}
+.field textarea { resize: vertical; min-height: 88px; }
+
+footer {
+  border-top: 1px solid var(--line);
+  padding-block: 26px 44px;
+  display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px;
+  font-size: .82rem; color: var(--ink-muted);
+  font-family: "Space Mono", monospace;
+}
+</style>
+</head>
+
+<body>
+<nav class="top">
+  <div class="container">
+    <a class="logo" href="#top">Lace<span class="dot">.</span></a>
+    <div class="navlinks">
+      <a href="#resuelve">Qué resuelve</a>
+      <a href="#proyectos">Proyectos</a>
+      <a href="#precios">Precios</a>
+      <a href="#contacto">Contacto</a>
+    </div>
+    <a class="btn btn-primary" href="https://wa.me/34722197596" target="_blank" rel="noopener">WhatsApp</a>
+  </div>
+</nav>
+
+<div class="container">
+
+  <section class="hero" id="top">
+    <div class="hero-grid">
+      <div>
+        <span class="eyebrow">Automatización a medida · España</span>
+        <h1>El hilo que ata tu negocio, para que no se te <em>escape</em> nada.</h1>
+        <p class="lede">Citas que nadie confirma, la misma pregunta contestada mil veces, publicaciones que se te olvida subir. Monto el sistema que lo hace por ti, todos los días, sin que nadie tenga que estar pendiente.</p>
+        <div class="hero-cta">
+          <a class="btn btn-primary" href="https://wa.me/34722197596" target="_blank" rel="noopener">Cuéntame tu caso →</a>
+          <a class="btn btn-ghost" href="#precios">Ver precios</a>
+        </div>
+        <div class="hero-badges">
+          <div class="b"><strong>Banca</strong> Años gestionando infraestructura crítica antes de montar Lace</div>
+          <div class="b"><strong>Sin intermediarios</strong> Diseño y construyo cada sistema yo mismo</div>
+          <div class="b"><strong>Sin tecnicismos</strong> Hablamos de lo que te ahorra tiempo, nada más</div>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <svg class="hoop" viewBox="0 0 200 200" aria-hidden="true">
+          <circle cx="100" cy="100" r="92" fill="none" stroke="var(--gold)" stroke-width="1" stroke-dasharray="2 6"/>
+          <circle cx="100" cy="100" r="78" fill="none" stroke="var(--thread)" stroke-width="1" stroke-dasharray="1 5"/>
+        </svg>
+        <div class="phone">
+          <div class="phone-head">
+            <div class="avatar">L</div>
+            <div>
+              <div class="name">Lace</div>
+              <div class="sub">en línea</div>
+            </div>
+          </div>
+          <div class="bubble in">Hola! ¿Tenéis hueco mañana por la tarde?<span class="t">14:02</span></div>
+          <div class="bubble out">Tengo libre a las 18:00 o a las 19:30, ¿cuál te viene mejor?<span class="t">14:02</span></div>
+          <div class="bubble in">18:00 perfecto<span class="t">14:03</span></div>
+          <div class="bubble out">Cita confirmada. Te escribo un recordatorio unas horas antes 👍<span class="t">14:03</span></div>
+          <div class="bubble out">Recordatorio: tu cita es hoy a las 18:00. Responde OK para confirmar.<span class="t">mañana</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="stitch"></div>
+
+  <section id="resuelve">
+    <div class="section-head">
+      <span class="eyebrow">Qué resuelve</span>
+      <h2>Cualquier negocio con tareas que se repiten cada semana</h2>
+      <p>Empezó con barberías, clínicas de estética y peluquerías, pero el problema de fondo lo tiene cualquier negocio local.</p>
+    </div>
+    <div class="verticals">
+      <div class="v-card">
+        <span class="mark"></span>
+        <h3>Barberías y peluquerías</h3>
+        <p>Confirmación y recordatorio automático de cada cita, para que los huecos cancelados a última hora se puedan volver a ocupar.</p>
+      </div>
+      <div class="v-card">
+        <span class="mark"></span>
+        <h3>Clínicas estéticas</h3>
+        <p>Recordatorio 24h antes de cada sesión y respuesta automática a lo que preguntan todo el día: precio, disponibilidad, duración.</p>
+      </div>
+      <div class="v-card">
+        <span class="mark"></span>
+        <h3>Redes sociales y cualquier otro negocio</h3>
+        <p>Publicaciones que salen solas, respuestas automáticas por WhatsApp o Instagram, o cualquier tarea manual que se repita cada semana.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="stitch"></div>
+
+  <section id="proyectos">
+    <div class="section-head">
+      <span class="eyebrow">Proyectos</span>
+      <h2>Lo que he construido hasta ahora</h2>
+      <p>Ejemplos reales de lo que puedo montar — no son clientes que me hayan contratado (todavía), así que van con nombre cambiado.</p>
+    </div>
+    <div class="projects">
+      <div class="p-card">
+        <span class="tag">web + marca · ejemplo</span>
+        <h3>Barbería Nómade</h3>
+        <p>Barbería premium en Madrid. Diseño y desarrollo completo de la web: marca, catálogo de servicios, tienda y academia de formación.</p>
+        <div class="meta">Madrid · barbería</div>
+      </div>
+      <div class="p-card">
+        <span class="tag">asistente WhatsApp · ejemplo</span>
+        <h3>Detalle & Co</h3>
+        <p>Tienda de regalos y dulcería en Asturias. Asistente que responde preguntas frecuentes y recomienda productos del catálogo por WhatsApp.</p>
+        <div class="meta">Asturias · regalos</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="stitch"></div>
+
+  <section aria-label="Cómo trabajamos">
+    <div class="section-head">
+      <span class="eyebrow">Cómo trabajamos</span>
+      <h2>De la idea a funcionando, sin vueltas</h2>
+    </div>
+    <div class="process">
+      <div class="step"><span class="num mono">01</span><h3>Hablamos de tu caso</h3><p>Por WhatsApp o en una llamada corta, sin formularios largos.</p></div>
+      <div class="step"><span class="num mono">02</span><h3>Te propongo solución y precio</h3><p>Cerrado desde el principio, sin sorpresas después.</p></div>
+      <div class="step"><span class="num mono">03</span><h3>Lo monto</h3><p>Diseño, construyo y pruebo el sistema con tus casos reales.</p></div>
+      <div class="step"><span class="num mono">04</span><h3>Funciona solo desde el día 1</h3><p>Tú te dedicas al negocio; el sistema hace lo repetitivo.</p></div>
+    </div>
+  </section>
+
+  <div class="stitch"></div>
+
+  <section id="precios">
+    <div class="section-head">
+      <span class="eyebrow">Precios</span>
+      <h2>Sin letra pequeña</h2>
+      <p>Cada negocio necesita algo distinto, así que el precio final se ajusta a tu caso — esto es una referencia clara de cómo suele funcionar.</p>
+    </div>
+    <div class="pricing">
+      <div class="price-card">
+        <h3>Algo puntual</h3>
+        <div class="amount">desde 50€</div>
+        <p class="desc">Una respuesta automática a lo que más te preguntan, o tus publicaciones en redes programadas para que salgan solas.</p>
+        <div class="roi">Listo en menos de un día.</div>
+      </div>
+      <div class="price-card featured">
+        <h3>A medida</h3>
+        <div class="amount">199–600€</div>
+        <p class="desc">Desde un script concreto hasta un sistema completo: recordatorios, reservas, respuestas automáticas.</p>
+        <div class="roi"><a href="https://wa.me/34722197596" target="_blank" rel="noopener">Pide presupuesto sin compromiso →</a></div>
+      </div>
+      <div class="price-card">
+        <h3>Mantenimiento</h3>
+        <div class="amount">a medida</div>
+        <p class="desc">Para cuando el sistema ya está funcionando y quieres que lo cuide y lo ajuste mes a mes.</p>
+        <div class="roi">Se habla una vez está montado.</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="stitch"></div>
+
+  <section id="contacto">
+    <div class="section-head">
+      <span class="eyebrow">Contacto</span>
+      <h2>Cuéntame qué se te está escapando de las manos</h2>
+    </div>
+    <div class="contact-grid">
+      <div class="contact-card">
+        <a class="contact-line" href="https://wa.me/34722197596" target="_blank" rel="noopener">
+          <span><span class="lbl">WhatsApp</span><br><span class="val">+34 722 19 75 96</span></span>
+        </a>
+        <a class="contact-line" href="mailto:lacespaindev@gmail.com">
+          <span><span class="lbl">Email</span><br><span class="val">lacespaindev@gmail.com</span></span>
+        </a>
+        <div class="contact-line" style="border-bottom:none;">
+          <span><span class="lbl">Respuesta</span><br><span class="val">Normalmente en menos de 24h</span></span>
+        </div>
+      </div>
+      <div class="contact-card">
+        <form class="contact-form" onsubmit="event.preventDefault(); window.open('https://wa.me/34722197596?text=' + encodeURIComponent('Hola Rubén, soy ' + (document.getElementById('cf-name').value || '') + '. ' + (document.getElementById('cf-msg').value || '')), '_blank');">
+          <div class="field"><label for="cf-name">Tu nombre</label><input id="cf-name" type="text" required></div>
+          <div class="field"><label for="cf-email">Email</label><input id="cf-email" type="email" required></div>
+          <div class="field"><label for="cf-msg">Qué te gustaría automatizar</label><textarea id="cf-msg" required></textarea></div>
+          <button class="btn btn-primary" type="submit" style="justify-content:center; margin-top:4px;">Enviar por WhatsApp →</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<footer>
+  <div>© <span id="year">2026</span> Lace · lacespaindev@gmail.com</div>
+  <div><a href="https://wa.me/34722197596" target="_blank" rel="noopener" style="text-decoration:none; color:var(--thread-strong); font-weight:600;">wa.me/34722197596</a></div>
+</footer>
+
+<script>
+  document.getElementById("year").textContent = new Date().getFullYear();
+</script>
+
+</body></html>
