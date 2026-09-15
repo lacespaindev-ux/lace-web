@@ -495,11 +495,15 @@ footer {
     log.appendChild(typing);
     typing.scrollIntoView({behavior:'smooth', block:'nearest'});
 
+    var ctrl = new AbortController();
+    var timer = setTimeout(function(){ ctrl.abort(); }, 20000);
     fetch(PROXY_URL, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ messages: history.slice(-8) }),
+      signal: ctrl.signal,
     })
+      .finally(function(){ clearTimeout(timer); })
       .then(function(res){ return res.ok ? res.json() : null; })
       .then(function(data){
         var reply = (data && data.reply) ? data.reply : FALLBACK;
