@@ -305,7 +305,7 @@ footer {
           </div>
         </div>
         </div>
-        <p class="demo-note">👆 Pregúntale lo que quieras — responde una IA real, en directo, con contexto de Lace</p>
+        <p class="demo-note">👆 Pregúntale lo que quieras — responde una IA real, en directo, con contexto de Lace. <span style="opacity:.75">Las conversaciones se guardan para mejorar el servicio.</span></p>
       </div>
     </div>
   </section>
@@ -460,6 +460,12 @@ footer {
   var PROXY_URL = 'https://lace-chat-proxy.lacespaindev.workers.dev';
 
   var history = [];
+  var sessionId = null;
+  try { sessionId = sessionStorage.getItem('laceChatSession'); } catch (e) {}
+  if (!sessionId) {
+    sessionId = (window.crypto && crypto.randomUUID) ? crypto.randomUUID() : ('s' + Date.now() + Math.random().toString(36).slice(2, 10));
+    try { sessionStorage.setItem('laceChatSession', sessionId); } catch (e) {}
+  }
   var FALLBACK = 'Perdona, ahora mismo no puedo pensarlo bien — escríbeme por WhatsApp (+34 722 197 596) y te contesto en el momento.';
 
   function timeNow(){
@@ -500,7 +506,7 @@ footer {
     fetch(PROXY_URL, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ messages: history.slice(-8) }),
+      body: JSON.stringify({ messages: history.slice(-8), sessionId: sessionId }),
       signal: ctrl.signal,
     })
       .finally(function(){ clearTimeout(timer); })
