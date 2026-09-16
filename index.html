@@ -142,7 +142,14 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
   box-shadow: var(--shadow);
   width: 100%; max-width: 300px;
 }
-.phone-head { display: flex; align-items: center; gap: 10px; padding: 2px 4px 14px; border-bottom: 1px solid var(--line); margin-bottom: 14px; }
+.phone { display: flex; flex-direction: column; }
+.phone-head { display: flex; align-items: center; gap: 10px; padding: 2px 4px 14px; border-bottom: 1px solid var(--line); margin-bottom: 14px; flex-shrink: 0; }
+.phone-msgs { height: clamp(200px, 36vh, 340px); overflow-y: auto; overscroll-behavior: contain; padding: 2px 4px 2px 0; margin-bottom: 6px; scrollbar-width: thin; scrollbar-color: var(--line) transparent; display: flex; flex-direction: column; }
+.phone-msgs::-webkit-scrollbar { width: 5px; }
+.phone-msgs::-webkit-scrollbar-thumb { background: var(--line); border-radius: 4px; }
+.day-tag { align-self: center; font-family: "Space Mono", monospace; font-size: .62rem; color: var(--ink-muted); background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 2px 9px; margin: 2px 0 10px; }
+@media (max-height: 700px) { .phone-msgs { height: clamp(160px, 30vh, 300px); } }
+.demo-form, .demo-chips { flex-shrink: 0; }
 .phone-head .avatar { width: 32px; height: 32px; border-radius: 50%; background: var(--thread-soft); color: var(--thread-strong); display: flex; align-items: center; justify-content: center; font-weight: 700; font-family: "Fraunces", serif; font-style: italic; font-size: .85rem; }
 .phone-head .name { font-weight: 600; font-size: .9rem; }
 .phone-head .sub { font-size: .74rem; color: var(--ink-muted); }
@@ -291,8 +298,11 @@ footer {
               <div class="sub">en línea</div>
             </div>
           </div>
-          <div class="bubble out">¡Hola! Soy del equipo de LaceDev, ¿qué necesitas?<span class="t">ahora</span></div>
-          <div id="demoLog"></div>
+          <div class="phone-msgs" id="demoMsgs">
+            <span class="day-tag">Hoy</span>
+            <div class="bubble out">¡Hola! Soy del equipo de LaceDev, ¿qué necesitas?<span class="t">ahora</span></div>
+            <div id="demoLog"></div>
+          </div>
           <form id="demoForm" class="demo-form" autocomplete="off">
             <input id="demoInput" type="text" placeholder="Escribe tu pregunta…" aria-label="Escribe tu pregunta para el asistente de LaceDev">
             <button type="submit" aria-label="Enviar">→</button>
@@ -450,7 +460,11 @@ footer {
 <script>
 (function(){
   var log = document.getElementById('demoLog');
+  var msgs = document.getElementById('demoMsgs');
   var form = document.getElementById('demoForm');
+  function scrollBottom(){
+    if (msgs) msgs.scrollTo({ top: msgs.scrollHeight, behavior: 'smooth' });
+  }
   var input = document.getElementById('demoInput');
   var chips = document.querySelectorAll('.chip');
   if (!log || !form || !input) return;
@@ -484,7 +498,7 @@ footer {
     t.textContent = timeNow();
     div.appendChild(t);
     log.appendChild(div);
-    div.scrollIntoView({behavior:'smooth', block:'nearest'});
+    scrollBottom();
     return div;
   }
 
@@ -499,7 +513,7 @@ footer {
     typing.className = 'bubble out typing';
     typing.innerHTML = '<span></span><span></span><span></span>';
     log.appendChild(typing);
-    typing.scrollIntoView({behavior:'smooth', block:'nearest'});
+    scrollBottom();
 
     var ctrl = new AbortController();
     var timer = setTimeout(function(){ ctrl.abort(); }, 20000);
