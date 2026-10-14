@@ -20,6 +20,7 @@
   --thread-soft: #f0dfe1;
   --gold: #9c7a3a;
   --gold-soft: #eee3c9;
+  --band: #2a1a1d; --band-ink: #f4ece0; --band-muted: #c9b9a6; --band-line: #4a3236;
   --shadow: 0 1px 2px rgba(33,29,23,.05), 0 20px 40px -28px rgba(33,29,23,.35);
 }
 @media (prefers-color-scheme: dark) {
@@ -35,6 +36,8 @@
     --thread-soft: #3a2229;
     --gold: #cba766;
     --gold-soft: #392f1c;
+    --band: #2b1b1f; --band-ink: #f4ece0; --band-muted: #c2b29f; --band-line: #4d3439;
+    --band: #2b1b1f; --band-ink: #f4ece0; --band-muted: #c2b29f; --band-line: #4d3439;
     --shadow: 0 1px 2px rgba(0,0,0,.4), 0 20px 40px -28px rgba(0,0,0,.6);
   }
 }
@@ -50,6 +53,7 @@
   --thread-soft: #3a2229;
   --gold: #cba766;
   --gold-soft: #392f1c;
+    --band: #2b1b1f; --band-ink: #f4ece0; --band-muted: #c2b29f; --band-line: #4d3439;
   --shadow: 0 1px 2px rgba(0,0,0,.4), 0 20px 40px -28px rgba(0,0,0,.6);
 }
 
@@ -249,6 +253,74 @@ footer {
   font-size: .82rem; color: var(--ink-muted);
   font-family: "Space Mono", monospace;
 }
+/* WEBS 60€ — banda a ancho completo */
+.webs {
+  background: var(--band); color: var(--band-ink);
+  margin-left: -22px;
+  margin-right: -22px;
+  padding-left: 22px;
+  padding-right: 22px;
+  padding-block: 88px;
+  overflow: hidden;
+}
+@media (max-width: 640px) { .webs { padding-block: 60px; } }
+.webs::before, .webs::after {
+  content: ""; position: absolute; left: 0; right: 0; height: 1px;
+  background-image: repeating-linear-gradient(90deg, var(--gold) 0 10px, transparent 10px 20px); opacity: .7;
+}
+.webs::before { top: 14px; }
+.webs::after { bottom: 14px; }
+.webs .eyebrow { color: var(--gold); }
+.webs em { color: var(--gold); }
+.webs-grid { display: grid; grid-template-columns: 1fr 1.05fr; gap: 64px; align-items: center; }
+.webs-grid > * { min-width: 0; }
+@media (max-width: 860px) { .webs-grid { grid-template-columns: 1fr; gap: 48px; } }
+.webs h2 { font-size: clamp(1.9rem, 3.6vw, 2.7rem); line-height: 1.1; }
+.webs .lede { color: var(--band-muted); margin-top: 18px; font-size: 1.05rem; max-width: 46ch; }
+
+.price-tag { display: flex; align-items: baseline; gap: 18px; flex-wrap: wrap; margin-top: 30px; padding-block: 18px; border-top: 1px solid var(--band-line); border-bottom: 1px solid var(--band-line); }
+.price-tag .big { font-family: "Fraunces", serif; font-size: 3.4rem; font-weight: 600; line-height: 1; font-variant-numeric: tabular-nums; }
+.price-tag .terms { font-family: "Space Mono", monospace; font-size: .74rem; text-transform: uppercase; letter-spacing: .05em; color: var(--band-muted); line-height: 1.7; }
+.price-tag .terms strong { color: var(--band-ink); font-weight: 700; }
+
+.includes { list-style: none; padding: 0; margin: 26px 0 0; display: grid; grid-template-columns: 1fr 1fr; gap: 12px 24px; }
+@media (max-width: 520px) { .includes { grid-template-columns: 1fr; } }
+.includes li { display: flex; gap: 10px; font-size: .93rem; color: var(--band-ink); align-items: baseline; }
+.includes li::before { content: "+"; font-family: "Space Mono", monospace; color: var(--gold); flex: none; }
+.webs-cta { display: flex; flex-wrap: wrap; gap: 14px; align-items: center; margin-top: 32px; }
+.webs .btn-light { background: var(--band-ink); color: var(--band); }
+.webs .btn-light:hover { background: var(--gold); color: var(--band); }
+.webs .fineprint { font-size: .84rem; color: var(--band-muted); }
+
+/* reloj del día: de la llamada a online */
+.day {
+  position: relative; background: color-mix(in srgb, var(--band-ink) 4%, transparent);
+  border: 1px solid var(--band-line); padding: 30px 28px 26px;
+}
+.day-head { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; flex-wrap: wrap; margin-bottom: 22px; }
+.day-head .mono { font-size: .72rem; text-transform: uppercase; letter-spacing: .06em; color: var(--band-muted); }
+.day-head .total { font-family: "Fraunces", serif; font-size: 1.4rem; font-style: italic; color: var(--gold); }
+.track { position: relative; list-style: none; margin: 0; padding: 0 0 0 26px; display: grid; gap: 22px; }
+.track::before { content: ""; position: absolute; left: 6px; top: 6px; bottom: 6px; width: 1px; background-image: repeating-linear-gradient(180deg, var(--gold) 0 6px, transparent 6px 12px); }
+.track li { position: relative; display: grid; grid-template-columns: 58px 1fr; gap: 14px; align-items: baseline; }
+.track li::before { content: ""; position: absolute; left: -24px; top: 7px; width: 9px; height: 9px; border-radius: 50%; background: var(--band); border: 1px solid var(--gold); }
+.track li:last-child::before { background: var(--gold); }
+.track .h { font-family: "Space Mono", monospace; font-size: .8rem; color: var(--gold); font-variant-numeric: tabular-nums; }
+.track strong { display: block; font-weight: 600; font-size: .98rem; }
+.track span.d { display: block; color: var(--band-muted); font-size: .86rem; margin-top: 2px; }
+
+.webs .btn { border-radius: 3px; }
+.hero-note { display: inline-flex; align-items: center; gap: 10px; margin-top: 18px; font-size: .88rem; color: var(--ink-muted); text-decoration: none; border-bottom: 1px dashed var(--gold); padding-bottom: 2px; }
+.hero-note strong { color: var(--thread-strong); font-weight: 600; }
+.hero-note:hover { color: var(--ink); }
+.navlinks { align-items: center; }
+.navlinks .nav-new { color: var(--thread-strong); font-weight: 600; display: inline-flex; gap: 6px; align-items: center; }
+.navlinks .nav-new::after { content: "60€"; font-family: "Space Mono", monospace; font-size: .66rem; background: var(--gold-soft); color: var(--gold); padding: 1px 6px; border-radius: 2px; }
+.pricing { grid-template-columns: repeat(4, 1fr); gap: 16px; }
+@media (max-width: 960px) { .pricing { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 560px) { .pricing { grid-template-columns: 1fr; } }
+.price-card.web { border-color: var(--gold); position: relative; }
+.price-card.web::before { content: "nuevo"; position: absolute; top: -11px; left: 24px; background: var(--paper); padding: 0 8px; font-family: "Space Mono", monospace; font-size: .68rem; color: var(--gold); text-transform: uppercase; letter-spacing: .04em; }
 </style>
 </head>
 
@@ -258,6 +330,7 @@ footer {
     <a class="logo" href="#top">Lace<span class="dot">.</span></a>
     <div class="navlinks">
       <a href="#resuelve">Qué resuelve</a>
+      <a class="nav-new" href="#webs">Webs</a>
       <a href="#proyectos">Proyectos</a>
       <a href="#precios">Precios</a>
       <a href="#contacto">Contacto</a>
@@ -278,6 +351,7 @@ footer {
           <a class="btn btn-primary" href="https://wa.me/34614443890" target="_blank" rel="noopener">Pide tu prueba gratis →</a>
           <a class="btn btn-ghost" href="#precios">Ver cómo funciona</a>
         </div>
+        <a class="hero-note" href="#webs">¿Tu negocio no tiene web? <strong>Te la hago en menos de 5 horas por 60€ ↓</strong></a>
         <div class="hero-badges">
           <div class="b"><strong>Banca</strong> Años gestionando infraestructura crítica antes de montar Lace</div>
           <div class="b"><strong>Sin intermediarios</strong> Diseño y construyo cada sistema yo mismo</div>
@@ -347,7 +421,43 @@ footer {
     </div>
   </section>
 
-  <div class="stitch"></div>
+  <section class="webs" id="webs">
+    <div class="container webs-grid">
+      <div>
+        <span class="eyebrow">Página web · nuevo</span>
+        <h2>Tu negocio en Google con web propia, <em>hoy mismo</em>.</h2>
+        <p class="lede">Si quien te busca solo encuentra una ficha de Maps o un Instagram, se va al de al lado. Te hago una web cuidada, pensada para el móvil y con botón directo a tu WhatsApp, en menos de 5 horas.</p>
+        <div class="price-tag">
+          <span class="big">60€</span>
+          <span class="terms"><strong>Pago único</strong><br>Sin cuotas mensuales</span>
+        </div>
+        <ul class="includes">
+          <li>Diseño hecho para tu negocio, no una plantilla</li>
+          <li>Carta o servicios, horario y ubicación</li>
+          <li>Botón de reserva por WhatsApp y llamada</li>
+          <li>Se ve bien en el móvil, que es donde te buscan</li>
+          <li>Mapa y "cómo llegar" con un toque</li>
+          <li>Publicada y lista para compartir el mismo día</li>
+        </ul>
+        <div class="webs-cta">
+          <a class="btn btn-light" href="https://wa.me/34614443890?text=Hola%2C%20quiero%20la%20web%20de%2060%E2%82%AC%20para%20mi%20negocio" target="_blank" rel="noopener">Quiero mi web →</a>
+          <span class="fineprint">Te la enseño terminada antes de que pagues nada.</span>
+        </div>
+      </div>
+      <div class="day" aria-label="Cómo se hace en un día">
+        <div class="day-head">
+          <span class="mono">Un día normal de trabajo</span>
+          <span class="total">menos de 5 h</span>
+        </div>
+        <ol class="track">
+          <li><span class="h">0:00</span><div><strong>Me cuentas tu negocio</strong><span class="d">Por WhatsApp: qué haces, horario, dirección y un par de fotos.</span></div></li>
+          <li><span class="h">0:30</span><div><strong>Diseño y textos</strong><span class="d">Elijo colores y tipografía que encajen contigo y escribo el contenido.</span></div></li>
+          <li><span class="h">3:30</span><div><strong>Te la enseño</strong><span class="d">Te paso el enlace, la miras en el móvil y me dices qué cambiar.</span></div></li>
+          <li><span class="h">4:30</span><div><strong>Online</strong><span class="d">Ajustes hechos, publicada y lista para poner en Google y redes.</span></div></li>
+        </ol>
+      </div>
+    </div>
+  </section>
 
   <section id="proyectos">
     <div class="section-head">
@@ -395,6 +505,12 @@ footer {
       <p>Cada negocio necesita algo distinto, pero el trato es siempre el mismo: primero lo pruebas, luego decides.</p>
     </div>
     <div class="pricing">
+      <div class="price-card web">
+        <h3>Página web</h3>
+        <div class="amount">60€</div>
+        <p class="desc">Web propia para tu negocio, adaptada al móvil y con reserva por WhatsApp. Te la enseño terminada antes de pagar.</p>
+        <div class="roi"><a href="#webs">Lista en menos de 5 horas →</a></div>
+      </div>
       <div class="price-card">
         <h3>La prueba</h3>
         <div class="amount">gratis</div>
