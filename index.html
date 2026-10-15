@@ -70,7 +70,20 @@
     .avatar { width: 38px; height: 38px; display: grid; place-items: center; border-radius: 50%; background: #eee2e0; color: var(--wine); font: italic 700 18px var(--serif); }
     .sample-head strong { display: block; font-size: 13px; }
     .online { color: var(--green); font-size: 11px; }
-    .chat { min-height: 246px; display: flex; flex-direction: column; gap: 11px; padding: 20px; }
+    .chat { height: clamp(220px, 34vh, 320px); overflow-y: auto; overscroll-behavior: contain; padding: 20px; scrollbar-width: thin; scrollbar-color: var(--line) transparent; }
+    .chat-log { display: flex; flex-direction: column; gap: 11px; }
+    .demo-label .live { color: var(--green); }
+    .demo-label .live::before { content: ""; display: inline-block; width: 7px; height: 7px; margin-right: 6px; border-radius: 50%; background: var(--green); vertical-align: 1px; }
+    .bubble .t { display: block; margin-top: 5px; opacity: .65; font-size: 10px; }
+    .bubble.typing { display: flex; gap: 4px; padding: 13px 14px; }
+    .bubble.typing span { width: 6px; height: 6px; border-radius: 50%; background: #9a9286; animation: blink 1.2s infinite; }
+    .bubble.typing span:nth-child(2) { animation-delay: .2s; } .bubble.typing span:nth-child(3) { animation-delay: .4s; }
+    @keyframes blink { 0%, 80%, 100% { opacity: .25; } 40% { opacity: 1; } }
+    .chat-form { display: flex; gap: 8px; padding: 12px 14px 14px; border-top: 1px solid #e7e2d8; }
+    .chat-form input { flex: 1; min-width: 0; min-height: 42px; padding: 0 12px; border: 1px solid var(--line); border-radius: 99px; background: #fffdf8; color: var(--ink); font: 14px var(--sans); }
+    .chat-form input:focus { outline: 2px solid rgba(123,45,64,.25); border-color: var(--wine); }
+    .chat-form button { width: 42px; height: 42px; flex: none; border: 0; border-radius: 50%; background: var(--wine); color: #fff; font-size: 18px; cursor: pointer; }
+    .chat-form button:hover { background: var(--wine-dark); }
     .day { align-self: center; padding: 3px 9px; border: 1px solid #e6e0d5; border-radius: 99px; color: #8a8377; font-size: 10px; }
     .bubble { max-width: 88%; padding: 11px 13px; border-radius: 12px 12px 12px 3px; background: #eee9df; color: #454039; font-size: 13px; line-height: 1.5; }
     .bubble.out { align-self: flex-end; border-radius: 12px 12px 3px 12px; background: var(--wine); color: white; }
@@ -185,7 +198,7 @@
       h1 { max-width: 560px; font-size: clamp(43px, 12vw, 61px); }
       .lead { font-size: 16px; }
       .demo-wrap { justify-self: center; max-width: 430px; }
-      .chat { min-height: 198px; }
+      .chat { height: clamp(200px, 32vh, 280px); }
       .choice-section { padding: 18px 0 60px; }
       .choice-grid, .grid-3, .project-grid, .prices, .contact { grid-template-columns: 1fr; }
       .choice-card { min-height: 175px; }
@@ -239,25 +252,31 @@
             <span class="trust-pill"><b>Madrid</b> · atención cercana</span>
           </div>
         </div>
-        <aside class="demo-wrap" aria-label="Ejemplo visual de conversación automatizada">
-          <p class="demo-label"><span>Así podría ser una respuesta automática</span><span>Ejemplo</span></p>
+        <aside class="demo-wrap" aria-label="Chat con el asistente de Lace">
+          <p class="demo-label"><span>Pregúntale lo que quieras</span><span class="live">IA en directo</span></p>
           <div class="sample">
             <div class="sample-head">
               <div class="avatar" aria-hidden="true">L</div>
-              <div><strong>Lace · demo</strong><span class="online">Ejemplo de conversación</span></div>
+              <div><strong>Lace · asistente</strong><span class="online">En línea</span></div>
             </div>
-            <div class="chat" id="chat-demo" aria-live="polite">
-              <span class="day">Hoy</span>
-              <div class="bubble">Hola, ¿tenéis algún hueco esta semana?<small>Cliente · 10:14</small></div>
-              <div class="bubble out" id="demo-answer">¡Hola! Puedo ayudarte a consultar disponibilidad y reservar. ¿Qué día te viene mejor?<small>Respuesta de ejemplo</small></div>
+            <div class="chat" id="demoMsgs">
+              <div class="chat-log" id="demoLog" aria-live="polite">
+                <span class="day">Hoy</span>
+                <div class="bubble">¡Hola! Soy del equipo de LaceDev, ¿qué necesitas?</div>
+              </div>
             </div>
             <div class="sample-questions" aria-label="Preguntas de ejemplo">
-              <button class="chip" type="button" data-answer="Puedo enviar un recordatorio antes de la cita y ayudarte a confirmar o cambiar la hora.">¿Recordatorios?</button>
-              <button class="chip" type="button" data-answer="El precio depende de las tareas y herramientas que necesites. Primero definimos el alcance; pruebas el sistema antes de pagar.">¿Cuánto cuesta?</button>
-              <button class="chip" type="button" data-answer="Hablamos 15 minutos, preparo una prueba y la utilizas una semana con tus clientes. Después decides si te sirve.">¿Cómo funciona?</button>
+              <button class="chip" type="button" data-q="¿Podéis enviar recordatorios de citas por WhatsApp?">¿Recordatorios?</button>
+              <button class="chip" type="button" data-q="¿Cuánto cuesta una automatización?">¿Cuánto cuesta?</button>
+              <button class="chip" type="button" data-q="¿Cómo funciona la prueba de una semana?">¿Cómo funciona?</button>
             </div>
+            <form class="chat-form" id="demoForm">
+              <label class="sr-only" for="demoInput">Escribe tu mensaje</label>
+              <input id="demoInput" type="text" autocomplete="off" placeholder="Escribe tu pregunta…" maxlength="400">
+              <button type="submit" aria-label="Enviar">→</button>
+            </form>
           </div>
-          <p class="demo-note">Demostración ilustrativa: no es el asistente real de Lace y no envía ni guarda mensajes.</p>
+          <p class="demo-note">Responde una IA real, en directo, con información de Lace. Las conversaciones se guardan para mejorar el servicio.</p>
         </aside>
       </div>
     </section>
@@ -417,11 +436,71 @@
     <div class="wrap footer-row"><span>© <span id="year">2026</span> Lace · Madrid · lacespaindev@gmail.com</span><div class="footer-links"><a href="https://wa.me/34614443890">WhatsApp</a><a href="#inicio">Volver arriba ↑</a></div></div>
   </footer>
   <script>
-    const answers = document.querySelectorAll('.chip');
-    const answerBubble = document.getElementById('demo-answer');
-    answers.forEach((button) => button.addEventListener('click', () => {
-      answerBubble.innerHTML = `${button.dataset.answer}<small>Respuesta de ejemplo</small>`;
-    }));
+    (function () {
+      var log = document.getElementById('demoLog');
+      var msgs = document.getElementById('demoMsgs');
+      var form = document.getElementById('demoForm');
+      var input = document.getElementById('demoInput');
+      var chips = document.querySelectorAll('.sample-questions .chip');
+      if (!log || !form || !input) return;
+      var PROXY_URL = 'https://lace-chat-proxy.lacespaindev.workers.dev';
+      var FALLBACK = 'Perdona, ahora mismo no puedo responder bien. Escríbeme por WhatsApp al +34 614 44 38 90 y te contesto en el momento.';
+      var history = [];
+      var sessionId = null;
+      try { sessionId = sessionStorage.getItem('laceChatSession'); } catch (e) {}
+      if (!sessionId) {
+        sessionId = (window.crypto && crypto.randomUUID) ? crypto.randomUUID() : ('s' + Date.now() + Math.random().toString(36).slice(2, 10));
+        try { sessionStorage.setItem('laceChatSession', sessionId); } catch (e) {}
+      }
+      function scrollBottom() { msgs.scrollTo({ top: msgs.scrollHeight, behavior: 'smooth' }); }
+      function timeNow() { var d = new Date(); return String(d.getHours()).padStart(2, '0') + ':' + String(d.getMinutes()).padStart(2, '0'); }
+      function addBubble(text, cls) {
+        var div = document.createElement('div');
+        div.className = 'bubble' + (cls ? ' ' + cls : '');
+        div.textContent = text;
+        var t = document.createElement('span');
+        t.className = 't';
+        t.textContent = timeNow();
+        div.appendChild(t);
+        log.appendChild(div);
+        scrollBottom();
+      }
+      function ask(q) {
+        q = (q || '').trim();
+        if (!q) return;
+        addBubble(q, 'out');
+        input.value = '';
+        history.push({ role: 'user', content: q });
+        var typing = document.createElement('div');
+        typing.className = 'bubble typing';
+        typing.innerHTML = '<span></span><span></span><span></span>';
+        log.appendChild(typing);
+        scrollBottom();
+        var ctrl = new AbortController();
+        var timer = setTimeout(function () { ctrl.abort(); }, 20000);
+        fetch(PROXY_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ messages: history.slice(-8), sessionId: sessionId }),
+          signal: ctrl.signal
+        })
+          .finally(function () { clearTimeout(timer); })
+          .then(function (res) { return res.ok ? res.json() : null; })
+          .then(function (data) {
+            var reply = (data && data.reply) ? data.reply : FALLBACK;
+            typing.remove();
+            addBubble(reply, '');
+            history.push({ role: 'assistant', content: reply });
+          })
+          .catch(function () {
+            typing.remove();
+            addBubble(FALLBACK, '');
+            history.push({ role: 'assistant', content: FALLBACK });
+          });
+      }
+      form.addEventListener('submit', function (e) { e.preventDefault(); ask(input.value); });
+      chips.forEach(function (chip) { chip.addEventListener('click', function () { ask(chip.getAttribute('data-q')); }); });
+    })();
 
     document.getElementById('contact-form').addEventListener('submit', (event) => {
       event.preventDefault();
