@@ -9,6 +9,9 @@
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="icon" href="favicon.ico" sizes="any">
   <link rel="apple-touch-icon" href="icon-180.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,500;1,9..144,700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
   <style>
     :root {
       --paper: #f2efe7;
@@ -21,9 +24,9 @@
       --line: #d9d3c7;
       --gold: #c6a96a;
       --green: #526b57;
-      --serif: Georgia, "Times New Roman", serif;
-      --sans: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      --mono: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+      --serif: "Fraunces", Georgia, "Times New Roman", serif;
+      --sans: "Archivo", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      --mono: "Space Mono", "SFMono-Regular", Consolas, monospace;
       --wrap: 1160px;
     }
     * { box-sizing: border-box; }
@@ -175,6 +178,51 @@
     .footer-links a { text-decoration: none; }
     .footer-links a:hover { color: var(--wine); }
     .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+
+    /* Hilo de progreso: una costura dorada que avanza con el scroll */
+    .thread { position: absolute; left: 0; bottom: -1px; width: 100%; height: 2px; pointer-events: none; }
+    .thread i { display: block; height: 100%; width: 100%; transform-origin: left; transform: scaleX(0); background: repeating-linear-gradient(90deg, var(--gold) 0 9px, transparent 9px 14px); }
+
+    /* Menú desplegable (móvil) */
+    .menu-toggle { display: none; width: 40px; height: 40px; padding: 0; border: 1px solid var(--line); border-radius: 3px; background: transparent; color: var(--ink); cursor: pointer; }
+    .menu-toggle span { display: block; width: 18px; height: 1.5px; margin: 4px auto; background: currentColor; transition: transform .25s, opacity .25s; }
+    .menu-open .menu-toggle span:nth-child(1) { transform: translateY(5.5px) rotate(45deg); }
+    .menu-open .menu-toggle span:nth-child(2) { opacity: 0; }
+    .menu-open .menu-toggle span:nth-child(3) { transform: translateY(-5.5px) rotate(-45deg); }
+
+    /* Apariciones suaves */
+    .reveal { opacity: 0; transform: translateY(18px); transition: opacity .7s ease, transform .7s ease; }
+    .reveal.in { opacity: 1; transform: none; }
+
+    /* Botón flotante de WhatsApp */
+    .wa-float { position: fixed; z-index: 30; right: 18px; bottom: 18px; display: inline-flex; align-items: center; gap: 9px; padding: 12px 16px 12px 13px; border-radius: 99px; background: var(--wine); color: #fff; font: 600 13px var(--sans); text-decoration: none; box-shadow: 0 12px 30px rgba(97,32,51,.28); opacity: 0; transform: translateY(16px); pointer-events: none; transition: opacity .3s, transform .3s, background .2s; }
+    .wa-float.show { opacity: 1; transform: none; pointer-events: auto; }
+    .wa-float:hover { background: var(--wine-dark); }
+    .wa-float svg { width: 20px; height: 20px; flex: none; }
+
+    /* Webs en directo */
+    .live-webs { display: grid; grid-template-columns: .95fr 1.05fr; gap: clamp(28px, 6vw, 80px); align-items: center; }
+    .web-list { display: grid; gap: 8px; margin: 0; padding: 0; list-style: none; }
+    .web-pick { width: 100%; display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 4px 12px; padding: 14px 16px; border: 1px solid var(--line); border-radius: 3px; background: rgba(250,248,241,.6); color: var(--ink); text-align: left; cursor: pointer; font: inherit; transition: border-color .2s, background .2s; }
+    .web-pick:hover { border-color: #bfa9a0; }
+    .web-pick[aria-selected="true"] { border-color: var(--wine); background: var(--card); box-shadow: inset 3px 0 0 var(--wine); }
+    .web-pick strong { font: 500 19px/1.15 var(--serif); letter-spacing: -.02em; }
+    .web-pick small { grid-column: 1; color: var(--muted); font-size: 12px; }
+    .web-pick .tag { grid-row: 1 / span 2; grid-column: 2; padding: 4px 8px; border: 1px dashed var(--line); color: var(--muted); font: 700 9px var(--mono); letter-spacing: .1em; text-transform: uppercase; }
+    .phone-stage { display: grid; justify-items: center; gap: 14px; }
+    .phone { position: relative; width: min(330px, 100%); aspect-ratio: 9 / 18.5; padding: 11px; border-radius: 42px; background: #231d1a; box-shadow: 0 30px 70px rgba(40,30,22,.22), inset 0 0 0 2px #3a302b; }
+    .phone::before { content: ""; position: absolute; z-index: 2; top: 19px; left: 50%; width: 84px; height: 22px; border-radius: 99px; background: #231d1a; transform: translateX(-50%); }
+    .phone-screen { position: relative; width: 100%; height: 100%; overflow: hidden; border-radius: 32px; background: var(--paper-2); }
+    .phone-screen iframe { width: 100%; height: 100%; border: 0; background: #fff; }
+    .phone-loading { position: absolute; inset: 0; display: grid; place-items: center; color: var(--muted); font: 11px var(--mono); letter-spacing: .08em; transition: opacity .3s; }
+    .phone-loading.hide { opacity: 0; pointer-events: none; }
+    .phone-caption { color: var(--muted); font-size: 12px; text-align: center; }
+    .phone-caption a { color: var(--wine); font-weight: 650; text-underline-offset: 3px; }
+    .proof-row { display: flex; flex-wrap: wrap; gap: 22px; margin: 26px 0 0; }
+    .proof-row div { min-width: 120px; }
+    .proof-row b { display: block; color: var(--wine); font: 500 34px/1 var(--serif); letter-spacing: -.04em; }
+    .proof-row span { color: var(--muted); font-size: 12px; }
+
     @media (max-width: 820px) {
       .nav-links { gap: 13px; }
       .nav-links a { font-size: 12px; }
@@ -188,10 +236,16 @@
       html { scroll-padding-top: 68px; }
       .wrap { width: min(100% - 34px, var(--wrap)); }
       .nav { min-height: 62px; gap: 12px; }
-      .nav-links { overflow-x: auto; gap: 15px; scrollbar-width: none; }
-      .nav-links::-webkit-scrollbar { display: none; }
-      .nav-links a:nth-child(2), .nav-links a:nth-child(3) { display: none; }
+      .menu-toggle { display: block; margin-left: auto; }
+      .nav-links { position: absolute; top: 100%; left: 0; right: 0; flex-direction: column; align-items: stretch; gap: 0; padding: 6px 17px 14px; border-bottom: 1px solid var(--line); background: var(--paper); box-shadow: 0 18px 30px rgba(40,30,22,.08); opacity: 0; transform: translateY(-8px); pointer-events: none; transition: opacity .2s, transform .2s; }
+      .menu-open .nav-links { opacity: 1; transform: none; pointer-events: auto; }
+      .nav-links a { padding: 13px 2px; border-bottom: 1px dashed var(--line); font: 500 20px var(--serif); color: var(--ink); }
+      .nav-links a:last-child { border-bottom: 0; }
       .nav-cta { min-height: 38px; padding: 0 11px; font-size: 11px; }
+      .live-webs { grid-template-columns: 1fr; }
+      .phone { width: min(300px, 100%); }
+      .wa-float span { display: none; }
+      .wa-float { padding: 13px; }
       .brand { font-size: 21px; }
       .hero { padding: 54px 0 56px; }
       .hero-grid { grid-template-columns: 1fr; gap: 32px; }
@@ -216,6 +270,7 @@
     }
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; animation-duration: .01ms !important; }
+      .reveal { opacity: 1; transform: none; }
     }
   </style>
 </head>
@@ -223,15 +278,17 @@
   <header class="topbar">
     <div class="wrap nav">
       <a class="brand" href="#inicio" aria-label="Lace, inicio">Lace.</a>
-      <nav class="nav-links" aria-label="Navegación principal">
+      <nav class="nav-links" id="navLinks" aria-label="Navegación principal">
         <a href="#soluciones">Soluciones</a>
         <a href="#web">Webs</a>
-        <a href="#proyectos">Proyectos</a>
+        <a href="#proyectos">Webs en directo</a>
         <a href="#precios">Precios</a>
         <a href="#contacto">Contacto</a>
       </nav>
+      <button class="menu-toggle" id="menuToggle" type="button" aria-controls="navLinks" aria-expanded="false" aria-label="Abrir menú"><span></span><span></span><span></span></button>
       <a class="nav-cta" href="https://wa.me/34614443890?text=Hola%2C%20quiero%20hablar%20sobre%20mi%20negocio">WhatsApp <span aria-hidden="true">↗</span></a>
     </div>
+    <div class="thread" aria-hidden="true"><i id="threadBar"></i></div>
   </header>
 
   <main id="inicio">
@@ -360,30 +417,36 @@
 
     <section class="section" id="proyectos">
       <div class="wrap">
-        <div class="section-head">
-          <p class="eyebrow">Proyectos</p>
-          <h2>Ejemplos del tipo de soluciones.</h2>
-          <p>Una muestra del enfoque aplicado a negocios distintos. Sin métricas inventadas: cada proyecto se explica por lo que resuelve.</p>
-        </div>
-        <div class="project-grid">
-          <article class="project">
-            <div class="project-art" aria-label="Previsualización ilustrativa de una web de barbería">
-              <div class="mini-site" aria-hidden="true">
-                <div class="mini-nav"><span class="mini-logo">Nómade</span><span>Servicios　 ·　 Reservas</span></div>
-                <div class="mini-hero"><strong>Tu próximo corte empieza aquí.</strong><span>BARBERÍA · MADRID</span></div>
-                <div class="mini-services"><i></i><i></i><i></i></div>
+        <div class="live-webs">
+          <div>
+            <div class="section-head" style="margin-bottom:26px">
+              <p class="eyebrow">Webs en directo</p>
+              <h2>No te lo contamos. Tócala.</h2>
+              <p>Webs reales que hemos montado para bares, restaurantes y peluquerías. Elige una y úsala dentro del móvil, igual que la verían tus clientes.</p>
+            </div>
+            <ul class="web-list" role="tablist" aria-label="Elige una web">
+              <li><button class="web-pick" role="tab" aria-selected="true" data-src="https://lacespaindev-ux.github.io/elmirador/"><strong>El Mirador</strong><small>Bar · Hoyo de Manzanares</small><span class="tag">Muestra</span></button></li>
+              <li><button class="web-pick" role="tab" aria-selected="false" data-src="https://lacespaindev-ux.github.io/isaias/"><strong>Isaías Fernández</strong><small>Peluquería de caballeros · Hoyo</small><span class="tag">Muestra</span></button></li>
+              <li><button class="web-pick" role="tab" aria-selected="false" data-src="https://lacespaindev-ux.github.io/humo/"><strong>Humo</strong><small>Brasa · Galapagar</small><span class="tag">Muestra</span></button></li>
+              <li><button class="web-pick" role="tab" aria-selected="false" data-src="https://lacespaindev-ux.github.io/la-salchicheria/"><strong>La Salchichería</strong><small>Bar · Salamanca</small><span class="tag">Muestra</span></button></li>
+              <li><button class="web-pick" role="tab" aria-selected="false" data-src="https://lacespaindev-ux.github.io/la-fragua-de-elias/"><strong>La Fragua de Elías</strong><small>Restaurante · Carbajosa</small><span class="tag">Muestra</span></button></li>
+            </ul>
+            <div class="proof-row">
+              <div><b>&lt; 5 h</b><span>de encargo a web publicada</span></div>
+              <div><b>60 €</b><span>pago único, sin cuotas</span></div>
+              <div><b>100%</b><span>pensadas para el móvil</span></div>
+            </div>
+          </div>
+          <div class="phone-stage">
+            <div class="phone">
+              <div class="phone-screen">
+                <div class="phone-loading" id="phoneLoading">Cargando web…</div>
+                <iframe id="phoneFrame" title="Web de ejemplo dentro de un móvil" loading="lazy"></iframe>
               </div>
             </div>
-            <div class="project-body"><p class="eyebrow">Web + marca · ejemplo</p><h3>Barbería Nómade</h3><p>Concepto de web para una barbería premium: identidad, catálogo de servicios, tienda y academia de formación.</p><div class="project-tags"><span>Madrid</span><span>Barbería</span><span>Web</span></div></div>
-          </article>
-          <article class="project">
-            <div class="project-art" aria-label="Previsualización ilustrativa de un asistente de WhatsApp para tienda">
-              <div class="mini-chat" aria-hidden="true"><div class="mini-chat-top"><span class="avatar" style="width:28px;height:28px;font-size:14px">D</span>Detalle &amp; Co · asistente</div><div class="bubble">¿Buscas un regalo para una ocasión especial?</div><div class="bubble out">Sí, algo dulce para un cumpleaños.</div><div class="bubble">Puedo ayudarte a encontrar opciones del catálogo.</div></div>
-            </div>
-            <div class="project-body"><p class="eyebrow">Asistente WhatsApp · ejemplo</p><h3>Detalle &amp; Co</h3><p>Asistente para una tienda de regalos y dulcería: responde consultas frecuentes y orienta a los clientes en el catálogo.</p><div class="project-tags"><span>Asturias</span><span>Regalos</span><span>WhatsApp</span></div></div>
-          </article>
+            <p class="phone-caption">Muestras hechas por Lace a partir de información pública del negocio. <a id="phoneOpen" href="https://lacespaindev-ux.github.io/elmirador/" target="_blank" rel="noopener">Abrir en pantalla completa ↗</a></p>
+          </div>
         </div>
-        <p class="case-note">Nombres modificados por privacidad. Las imágenes de esta página son previsualizaciones ilustrativas, no capturas de los proyectos reales.</p>
       </div>
     </section>
 
@@ -435,7 +498,61 @@
   <footer>
     <div class="wrap footer-row"><span>© <span id="year">2026</span> Lace · Madrid · lacespaindev@gmail.com</span><div class="footer-links"><a href="https://wa.me/34614443890">WhatsApp</a><a href="#inicio">Volver arriba ↑</a></div></div>
   </footer>
+  <a class="wa-float" id="waFloat" href="https://wa.me/34614443890?text=Hola%2C%20quiero%20hablar%20sobre%20mi%20negocio" aria-label="Escribir a Lace por WhatsApp">
+    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2c-1.5 0-3-.4-4.3-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.2.3-.9.9-.9 2.2s.9 2.5 1 2.7c.1.2 1.8 2.8 4.4 3.9 1.6.7 2.3.8 3.1.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.5-.3Z"/></svg>
+    <span>Escríbenos</span>
+  </a>
   <script>
+    (function () {
+      var header = document.querySelector('.topbar');
+      var toggle = document.getElementById('menuToggle');
+      var links = document.getElementById('navLinks');
+      function setMenu(open) {
+        header.classList.toggle('menu-open', open);
+        toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+        toggle.setAttribute('aria-label', open ? 'Cerrar menú' : 'Abrir menú');
+      }
+      toggle.addEventListener('click', function () { setMenu(!header.classList.contains('menu-open')); });
+      links.addEventListener('click', function (e) { if (e.target.closest('a')) setMenu(false); });
+      document.addEventListener('keydown', function (e) { if (e.key === 'Escape') setMenu(false); });
+
+      var bar = document.getElementById('threadBar');
+      var wa = document.getElementById('waFloat');
+      function onScroll() {
+        var max = document.documentElement.scrollHeight - innerHeight;
+        bar.style.transform = 'scaleX(' + (max > 0 ? Math.min(scrollY / max, 1) : 0) + ')';
+        wa.classList.toggle('show', scrollY > innerHeight * 0.7);
+      }
+      addEventListener('scroll', onScroll, { passive: true });
+      onScroll();
+
+      var targets = document.querySelectorAll('.section-head, .problem-card, .step-card, .offer, .timeline, .live-webs, .price-card, .contact, .choice-card');
+      if ('IntersectionObserver' in window) {
+        var io = new IntersectionObserver(function (entries) {
+          entries.forEach(function (en) { if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); } });
+        }, { rootMargin: '0px 0px -8% 0px' });
+        targets.forEach(function (el) { el.classList.add('reveal'); io.observe(el); });
+      }
+
+      var frame = document.getElementById('phoneFrame');
+      var loading = document.getElementById('phoneLoading');
+      var open = document.getElementById('phoneOpen');
+      var picks = document.querySelectorAll('.web-pick');
+      function show(btn) {
+        picks.forEach(function (b) { b.setAttribute('aria-selected', b === btn ? 'true' : 'false'); });
+        var src = btn.getAttribute('data-src');
+        loading.classList.remove('hide');
+        frame.src = src;
+        open.href = src;
+      }
+      frame.addEventListener('load', function () { if (frame.src) loading.classList.add('hide'); });
+      picks.forEach(function (b) { b.addEventListener('click', function () { show(b); }); });
+      if ('IntersectionObserver' in window) {
+        var once = new IntersectionObserver(function (en) { if (en[0].isIntersecting) { show(picks[0]); once.disconnect(); } }, { rootMargin: '300px' });
+        once.observe(frame);
+      } else { show(picks[0]); }
+    })();
+
     (function () {
       var log = document.getElementById('demoLog');
       var msgs = document.getElementById('demoMsgs');
