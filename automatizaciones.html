@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f2efe7">
+  <meta name="description" content="Automatizaciones a medida, pago único: recordatorios de citas, respuestas automáticas en WhatsApp e Instagram, publicaciones. Una semana de prueba gratis.">
+  <title>Automatizaciones para negocios locales — Lace</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="favicon.ico" sizes="any">
+  <link rel="apple-touch-icon" href="icon-180.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,500;1,9..144,700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="wrap nav">
+      <a class="brand" href="index.html" aria-label="Lace, inicio">Lace.</a>
+      <nav class="nav-links" id="navLinks" aria-label="Navegación principal">
+        <a href="webs.html">Webs</a>
+        <a href="automatizaciones.html" aria-current="page">Automatizaciones</a>
+        <a href="quienes-somos.html">Quiénes somos</a>
+        <a href="contacto.html">Contacto</a>
+      </nav>
+      <button class="menu-toggle" id="menuToggle" type="button" aria-controls="navLinks" aria-expanded="false" aria-label="Abrir menú"><span></span><span></span><span></span></button>
+      <a class="nav-cta" href="https://wa.me/34614443890?text=Hola%2C%20quiero%20hablar%20sobre%20mi%20negocio">WhatsApp <span aria-hidden="true">↗</span></a>
+    </div>
+    <div class="thread" aria-hidden="true"><i id="threadBar"></i></div>
+  </header>
+
+  <main>
+    <section class="page-hero">
+      <div class="wrap hero-grid">
+        <div class="hero-copy">
+          <p class="eyebrow">Servicio 02 · Automatizaciones</p>
+          <h1>Menos tareas repetidas. <em>Más tiempo</em> para tu negocio.</h1>
+          <p class="lead">Citas que nadie confirma, la misma pregunta contestada mil veces o publicaciones que se olvidan. Diseño sistemas a medida para que esas tareas dejen de depender de que alguien esté pendiente.</p>
+          <div class="price-tag"><b>1 semana gratis</b><span>la pruebas antes de pagar · pago único</span></div>
+          <div class="actions"><a class="button" href="https://wa.me/34614443890?text=Hola%2C%20quiero%20contarte%20qu%C3%A9%20tarea%20me%20gustar%C3%ADa%20automatizar">Hablar de una automatización <span aria-hidden="true">→</span></a></div>
+        </div>
+        <aside class="demo-wrap" aria-label="Chat con el asistente de Lace">
+          <p class="demo-label"><span>Pruébalo: pregúntale lo que quieras</span><span class="live">IA en directo</span></p>
+          <div class="sample">
+            <div class="sample-head">
+              <div class="avatar" aria-hidden="true">L</div>
+              <div><strong>Lace · asistente</strong><span class="online">En línea</span></div>
+            </div>
+            <div class="chat" id="demoMsgs">
+              <div class="chat-log" id="demoLog" aria-live="polite">
+                <span class="day">Hoy</span>
+                <div class="bubble">¡Hola! Soy del equipo de LaceDev, ¿qué necesitas?</div>
+              </div>
+            </div>
+            <div class="sample-questions" aria-label="Preguntas de ejemplo">
+              <button class="chip" type="button" data-q="¿Podéis enviar recordatorios de citas por WhatsApp?">¿Recordatorios?</button>
+              <button class="chip" type="button" data-q="¿Cuánto cuesta una automatización?">¿Cuánto cuesta?</button>
+              <button class="chip" type="button" data-q="¿Cómo funciona la prueba de una semana?">¿Cómo funciona?</button>
+            </div>
+            <form class="chat-form" id="demoForm">
+              <label class="sr-only" for="demoInput">Escribe tu mensaje</label>
+              <input id="demoInput" type="text" autocomplete="off" placeholder="Escribe tu pregunta…" maxlength="400">
+              <button type="submit" aria-label="Enviar">→</button>
+            </form>
+          </div>
+          <p class="demo-note">Este chat es en sí una automatización: responde una IA real con información de Lace. Algo así puede atender a tus clientes. Las conversaciones se guardan para mejorar el servicio.</p>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap">
+        <div class="section-head">
+          <p class="eyebrow">Cuándo tiene sentido</p>
+          <h2>Si se repite, se puede simplificar.</h2>
+          <p>Empieza por una tarea concreta. Vemos si automatizarla tiene sentido y qué herramientas encajan con tu forma de trabajar.</p>
+        </div>
+        <div class="grid-3">
+          <article class="problem-card"><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M8.1 8.1 20 20M8.1 15.9 20 4"/></svg></span><h3>Barberías y peluquerías</h3><p>Recordatorios y confirmaciones para reducir citas olvidadas y tener más opciones de cubrir huecos cancelados.</p></article>
+          <article class="problem-card"><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3v4M12 17v4M3 12h4M17 12h4M6 6l2.5 2.5M15.5 15.5 18 18M6 18l2.5-2.5M15.5 8.5 18 6"/></svg></span><h3>Clínicas de estética</h3><p>Respuestas a preguntas habituales sobre servicios, disponibilidad y duración, además de recordatorios antes de cada sesión.</p></article>
+          <article class="problem-card"><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12Z"/><path d="M8.5 12h.01M12 12h.01M15.5 12h.01"/></svg></span><h3>Bares y otros negocios</h3><p>Pedidos por WhatsApp, publicaciones programadas, respuestas en Instagram y otros procesos manuales que se repiten.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap">
+        <div class="section-head">
+          <p class="eyebrow">Cómo funciona</p>
+          <h2>La pruebas una semana. Pagas solo si te sirve.</h2>
+        </div>
+        <div class="steps">
+          <article class="step-card"><h3>Hablamos 15 minutos</h3><p>Por WhatsApp, llamada o en persona si estás cerca. Elegimos una tarea concreta.</p></article>
+          <article class="step-card"><h3>Preparo una prueba</h3><p>Diseño el sistema para ese proceso antes de que tengas que decidir si lo compras.</p></article>
+          <article class="step-card"><h3>Lo usas una semana</h3><p>Con clientes reales. Si te sirve, pagas el precio acordado una vez; si no, no pagas.</p></article>
+        </div>
+        <div class="prices" style="margin-top:18px">
+          <article class="price-card"><p class="eyebrow">Semana de prueba</p><h3>Primero lo pruebas</h3><p class="price-big">0 €</p><p>Usas el sistema durante una semana sin pagar nada por adelantado.</p></article>
+          <article class="price-card featured"><p class="eyebrow">Si decides seguir</p><h3>Pago único</h3><p class="price-big" style="font-size:40px">A medida</p><p>Te digo el precio cerrado antes de empezar, según lo que haya que montar. Se paga una sola vez, sin cuotas mensuales.</p><a class="button" href="https://wa.me/34614443890?text=Hola%2C%20quiero%20pedir%20una%20prueba%20de%20automatizaci%C3%B3n">Pedir una prueba →</a></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap">
+        <div class="section-head"><p class="eyebrow">Preguntas frecuentes</p><h2>Sin tecnicismos.</h2></div>
+        <div class="faq"><details><summary>¿Necesito saber de tecnología?</summary><p>No. Me encargo yo de montarlo y de explicarte cómo funciona con palabras normales. Tú sigues usando WhatsApp, Instagram o lo que ya uses.</p></details><details><summary>¿Qué pasa si después de la semana no me sirve?</summary><p>Nada: no pagas. La prueba existe precisamente para que decidas con el sistema funcionando, no con una promesa.</p></details><details><summary>¿Hay cuotas mensuales?</summary><p>No. El precio acordado se paga una sola vez. Si algún servicio externo tuviera coste, te lo digo antes de empezar.</p></details><details><summary>¿Y si no sé qué automatizar?</summary><p>Cuéntame cómo es un día normal en tu negocio. Casi siempre aparece algo que se repite y se puede simplificar.</p></details></div>
+      </div>
+    </section>
+    <section class="section">
+      <div class="wrap">
+        <div class="cta-band">
+          <h2>¿Qué tarea quieres quitarte de encima?</h2>
+          <p>Cuéntamela en un mensaje y te digo si se puede automatizar y cómo quedaría.</p>
+          <div class="actions"><a class="button light" href="https://wa.me/34614443890?text=Hola%2C%20quiero%20contarte%20qu%C3%A9%20tarea%20me%20gustar%C3%ADa%20automatizar">Escribir por WhatsApp <span aria-hidden="true">→</span></a><a class="button ghost" href="contacto.html">Otras formas de contacto</a></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap footer-row"><span>© <span id="year">2026</span> Lace · Madrid · lacespaindev@gmail.com</span><div class="footer-links"><a href="webs.html">Webs</a><a href="automatizaciones.html">Automatizaciones</a><a href="quienes-somos.html">Quiénes somos</a><a href="contacto.html">Contacto</a></div></div>
+  </footer>
+  <a class="wa-float" id="waFloat" href="https://wa.me/34614443890?text=Hola%2C%20quiero%20hablar%20sobre%20mi%20negocio" aria-label="Escribir a Lace por WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2c-1.5 0-3-.4-4.3-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.2.3-.9.9-.9 2.2s.9 2.5 1 2.7c.1.2 1.8 2.8 4.4 3.9 1.6.7 2.3.8 3.1.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.5-.3Z"/></svg><span>Escríbeme</span></a>
+  <script src="site.js"></script>
+</body>
+</html>
