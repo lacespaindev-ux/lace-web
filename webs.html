@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#f2efe7">
+  <meta name="theme-color" content="#f3efe6">
   <meta name="description" content="Web a medida para tu negocio, pago único y sin cuotas. Carta o servicios, horario, mapa y botón de WhatsApp. Te la enseño terminada antes de pagar.">
   <title>Páginas web para negocios locales — Lace</title>
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
@@ -11,21 +11,40 @@
   <link rel="apple-touch-icon" href="icon-180.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,500;1,9..144,700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700;12..96,800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body class="v2">
   <header class="topbar">
     <div class="wrap nav">
-      <a class="brand" href="index.html" aria-label="Lace, inicio">Lace.</a>
+      <a class="brand" href="index.html" aria-label="Lace, inicio">Lace<span class="brand-dot">.</span></a>
       <nav class="nav-links" id="navLinks" aria-label="Navegación principal">
-        <a href="webs.html" aria-current="page">Webs</a>
-        <a href="automatizaciones.html">Automatizaciones</a>
+        <div class="nav-drop" id="navDrop">
+          <button class="nav-drop-btn" id="navDropBtn" type="button" aria-expanded="false" aria-controls="megaMenu">Servicios <span aria-hidden="true">▾</span></button>
+          <div class="mega" id="megaMenu">
+            <div class="mega-col">
+              <p class="mega-title">Que te encuentren</p>
+              <a href="webs.html"><b>Página web</b><span>Carta, horario y mapa, pensada para el móvil</span></a>
+              <a href="webs.html#en-directo"><b>Webs en directo</b><span>Mira una muestra real dentro de un móvil</span></a>
+            </div>
+            <div class="mega-col">
+              <p class="mega-title">Que te escriban</p>
+              <a href="webs.html"><b>Botón de WhatsApp</b><span>El cliente te escribe o llama en un toque</span></a>
+              <a href="automatizaciones.html"><b>Respuestas automáticas</b><span>Horarios, precios y dudas de siempre</span></a>
+            </div>
+            <div class="mega-col">
+              <p class="mega-title">Que vuelvan</p>
+              <a href="automatizaciones.html"><b>Recordatorios de citas</b><span>Menos huecos perdidos en tu agenda</span></a>
+              <a href="automatizaciones.html"><b>Automatizaciones a medida</b><span>Una semana de prueba gratis</span></a>
+            </div>
+          </div>
+        </div>
+        <a href="index.html#como-trabajo">Cómo trabajo</a>
         <a href="quienes-somos.html">Quiénes somos</a>
         <a href="contacto.html">Contacto</a>
       </nav>
       <button class="menu-toggle" id="menuToggle" type="button" aria-controls="navLinks" aria-expanded="false" aria-label="Abrir menú"><span></span><span></span><span></span></button>
-      <a class="nav-cta" href="https://wa.me/34614443890?text=Hola%2C%20quiero%20hablar%20sobre%20mi%20negocio">WhatsApp <span aria-hidden="true">↗</span></a>
+      <a class="nav-cta" href="https://wa.me/34614443890?text=Hola%2C%20quiero%20una%20muestra%20gratis%20para%20mi%20negocio">Muestra gratis</a>
     </div>
     <div class="thread" aria-hidden="true"><i id="threadBar"></i></div>
   </header>
@@ -119,8 +138,15 @@
     </section>
   </main>
 
-  <footer>
-    <div class="wrap footer-row"><span>© <span id="year">2026</span> Lace · Madrid · lacespaindev@gmail.com</span><div class="footer-links"><a href="webs.html">Webs</a><a href="automatizaciones.html">Automatizaciones</a><a href="quienes-somos.html">Quiénes somos</a><a href="contacto.html">Contacto</a></div></div>
+  <footer class="mega-footer">
+    <div class="wrap mf-grid">
+      <div class="mf-brand"><a class="brand" href="index.html">Lace<span class="brand-dot">.</span></a><p>Webs y automatizaciones para negocios locales.</p><a class="button" href="https://wa.me/34614443890?text=Hola%2C%20quiero%20una%20muestra%20gratis%20para%20mi%20negocio">Muestra gratis</a></div>
+      <div><p class="mf-title">Que te encuentren</p><a href="webs.html">Página web</a><a href="webs.html#en-directo">Webs en directo</a></div>
+      <div><p class="mf-title">Que te escriban y vuelvan</p><a href="automatizaciones.html">Respuestas automáticas</a><a href="automatizaciones.html">Recordatorios de citas</a><a href="automatizaciones.html">Automatizaciones a medida</a></div>
+      <div><p class="mf-title">Lace</p><a href="quienes-somos.html">Quiénes somos</a><a href="index.html#como-trabajo">Cómo trabajo</a><a href="contacto.html">Contacto</a></div>
+      <div><p class="mf-title">Contacto</p><span>WhatsApp: 614 44 38 90</span><span>lacespaindev@gmail.com</span><span>Madrid</span></div>
+    </div>
+    <div class="wrap mf-bottom"><span>© <span id="year">2026</span> Lace. Todos los derechos reservados.</span></div>
   </footer>
   <a class="wa-float" id="waFloat" href="https://wa.me/34614443890?text=Hola%2C%20quiero%20hablar%20sobre%20mi%20negocio" aria-label="Escribir a Lace por WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2c-1.5 0-3-.4-4.3-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.2.3-.9.9-.9 2.2s.9 2.5 1 2.7c.1.2 1.8 2.8 4.4 3.9 1.6.7 2.3.8 3.1.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.5-.3Z"/></svg><span>Escríbeme</span></a>
   <script src="site.js"></script>

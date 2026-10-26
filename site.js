@@ -21,7 +21,7 @@
   addEventListener('scroll', onScroll, { passive: true });
   onScroll();
 
-  var targets = document.querySelectorAll('.section-head, .problem-card, .step-card, .offer, .timeline, .live-webs, .price-card, .contact, .service, .skill, .projects-list li, .study article, .faq, .cta-band');
+  var targets = document.querySelectorAll('.b3-card, .beliefs3 article, .steps3 article, .case, .benefit, .figure, .beliefs li, .section-head, .problem-card, .step-card, .offer, .timeline, .live-webs, .price-card, .contact, .service, .skill, .projects-list li, .study article, .faq, .cta-band');
   if ('IntersectionObserver' in window) {
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (en) { if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); } });
@@ -41,7 +41,7 @@
   var view = document.getElementById('phoneView');
   function show(btn) {
     picks.forEach(function (b) { b.setAttribute('aria-selected', b === btn ? 'true' : 'false'); });
-    var src = btn.getAttribute('data-src');
+    var src = btn ? btn.getAttribute('data-src') : frame.getAttribute('data-src');
     loading.classList.remove('hide');
     frame.src = src; open.href = src;
   }
@@ -54,9 +54,9 @@
   frame.addEventListener('load', function () { if (frame.src) loading.classList.add('hide'); });
   picks.forEach(function (b) { b.addEventListener('click', function () { show(b); }); });
   if ('IntersectionObserver' in window) {
-    var once = new IntersectionObserver(function (en) { if (en[0].isIntersecting) { show(picks[0]); once.disconnect(); } }, { rootMargin: '300px' });
+    var once = new IntersectionObserver(function (en) { if (en[0].isIntersecting) { show(picks[0] || null); once.disconnect(); } }, { rootMargin: '300px' });
     once.observe(frame);
-  } else { show(picks[0]); }
+  } else { show(picks[0] || null); }
 })();
 
 /* Chat con IA en directo */
@@ -118,5 +118,55 @@
     var message = String(form.get('message') || '').trim();
     var body = 'Hola, soy ' + name + '.' + (email ? ' Mi email es ' + email + '.' : '') + (service ? ' Me interesa: ' + service + '.' : '') + '\n\n' + message;
     window.open('https://wa.me/34614443890?text=' + encodeURIComponent(body), '_blank', 'noopener,noreferrer');
+  });
+})();
+
+/* Gancho de la portada: muestra gratis -> WhatsApp */
+(function () {
+  var f = document.getElementById('hookForm');
+  if (!f) return;
+  f.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var name = document.getElementById('hookName').value.trim();
+    var text = 'Hola Rubén, quiero una muestra gratis para mi negocio' + (name ? ': ' + name : '') + '.';
+    window.location.href = 'https://wa.me/34614443890?text=' + encodeURIComponent(text);
+  });
+})();
+
+/* Desplegable de servicios (escritorio) */
+(function () {
+  var drop = document.getElementById('navDrop');
+  var btn = document.getElementById('navDropBtn');
+  if (!drop || !btn) return;
+  function set(open) { drop.classList.toggle('open', open); btn.setAttribute('aria-expanded', open ? 'true' : 'false'); }
+  btn.addEventListener('click', function (e) { e.stopPropagation(); set(!drop.classList.contains('open')); });
+  if (window.matchMedia('(hover: hover)').matches) {
+    drop.addEventListener('mouseenter', function () { set(true); });
+    drop.addEventListener('mouseleave', function () { set(false); });
+  }
+  document.addEventListener('click', function (e) { if (!drop.contains(e.target)) set(false); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') set(false); });
+})();
+
+/* Pestañas de beneficios */
+(function () {
+  var tabs = document.querySelectorAll('.tabs .tab');
+  if (!tabs.length) return;
+  function select(t) {
+    tabs.forEach(function (x) {
+      var on = x === t;
+      x.setAttribute('aria-selected', on ? 'true' : 'false');
+      x.tabIndex = on ? 0 : -1;
+      document.getElementById(x.getAttribute('aria-controls')).hidden = !on;
+    });
+  }
+  tabs.forEach(function (t, i) {
+    t.addEventListener('click', function () { select(t); });
+    t.addEventListener('keydown', function (e) {
+      if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
+        var n = tabs[(i + (e.key === 'ArrowRight' ? 1 : tabs.length - 1)) % tabs.length];
+        select(n); n.focus();
+      }
+    });
   });
 })();

@@ -3,119 +3,311 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#f2efe7">
-  <meta name="description" content="Páginas web y automatizaciones a medida para negocios locales. Pago único, sin cuotas, y ves el resultado antes de pagar. Trato directo con Rubén, ingeniero informático.">
+  <meta name="theme-color" content="#f3efe6">
+  <meta name="description" content="Webs y automatizaciones de WhatsApp para bares, barberías, clínicas y negocios locales. Te preparo una muestra gratis con tu negocio. Pago único, sin cuotas.">
   <title>Lace — Webs y automatizaciones para negocios locales</title>
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="icon" href="favicon.ico" sizes="any">
   <link rel="apple-touch-icon" href="icon-180.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,500;1,9..144,700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700;12..96,800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body class="v2 home">
+  <!--NAV-->
   <header class="topbar">
     <div class="wrap nav">
-      <a class="brand" href="index.html" aria-label="Lace, inicio">Lace.</a>
+      <a class="brand" href="index.html" aria-label="Lace, inicio">Lace<span class="brand-dot">.</span></a>
       <nav class="nav-links" id="navLinks" aria-label="Navegación principal">
-        <a href="webs.html">Webs</a>
-        <a href="automatizaciones.html">Automatizaciones</a>
+        <div class="nav-drop" id="navDrop">
+          <button class="nav-drop-btn" id="navDropBtn" type="button" aria-expanded="false" aria-controls="megaMenu">Servicios <span aria-hidden="true">▾</span></button>
+          <div class="mega" id="megaMenu">
+            <div class="mega-col">
+              <p class="mega-title">Que te encuentren</p>
+              <a href="webs.html"><b>Página web</b><span>Carta, horario y mapa, pensada para el móvil</span></a>
+              <a href="webs.html#en-directo"><b>Webs en directo</b><span>Mira una muestra real dentro de un móvil</span></a>
+            </div>
+            <div class="mega-col">
+              <p class="mega-title">Que te escriban</p>
+              <a href="webs.html"><b>Botón de WhatsApp</b><span>El cliente te escribe o llama en un toque</span></a>
+              <a href="automatizaciones.html"><b>Respuestas automáticas</b><span>Horarios, precios y dudas de siempre</span></a>
+            </div>
+            <div class="mega-col">
+              <p class="mega-title">Que vuelvan</p>
+              <a href="automatizaciones.html"><b>Recordatorios de citas</b><span>Menos huecos perdidos en tu agenda</span></a>
+              <a href="automatizaciones.html"><b>Automatizaciones a medida</b><span>Una semana de prueba gratis</span></a>
+            </div>
+          </div>
+        </div>
+        <a href="index.html#como-trabajo">Cómo trabajo</a>
         <a href="quienes-somos.html">Quiénes somos</a>
         <a href="contacto.html">Contacto</a>
       </nav>
       <button class="menu-toggle" id="menuToggle" type="button" aria-controls="navLinks" aria-expanded="false" aria-label="Abrir menú"><span></span><span></span><span></span></button>
-      <a class="nav-cta" href="https://wa.me/34614443890?text=Hola%2C%20quiero%20hablar%20sobre%20mi%20negocio">WhatsApp <span aria-hidden="true">↗</span></a>
+      <a class="nav-cta" href="https://wa.me/34614443890?text=Hola%2C%20quiero%20una%20muestra%20gratis%20para%20mi%20negocio">Muestra gratis</a>
     </div>
     <div class="thread" aria-hidden="true"><i id="threadBar"></i></div>
   </header>
+  <!--/NAV-->
 
   <main>
-    <section class="hero">
-      <div class="wrap hero-grid">
-        <div class="hero-copy">
-          <p class="eyebrow">Webs y automatizaciones · negocios locales</p>
-          <h1>Tu negocio, <em>bien atado</em> en internet.</h1>
-          <p class="lead">Hago dos cosas para bares, barberías, clínicas y tiendas de barrio: <b>páginas web</b> listas para compartir y <b>automatizaciones</b> que te quitan tareas repetidas. Ves el resultado antes de pagar y sin cuotas mensuales.</p>
-          <div class="actions">
-            <a class="button" href="https://wa.me/34614443890?text=Hola%2C%20quiero%20hablar%20sobre%20mi%20negocio">Escríbeme por WhatsApp <span aria-hidden="true">→</span></a>
-            <a class="button secondary" href="#servicios">Ver los servicios</a>
+    <!-- 1. Portada centrada con gancho y móvil -->
+    <section class="v2-hero">
+      <div class="wrap v2-hero-inner">
+        <h1>La forma más fácil de que tu negocio <span class="hl">consiga clientes</span> en internet.</h1>
+        <p class="v2-lead">Webs y WhatsApp automático para bares, barberías, clínicas y tiendas de barrio. Dime cómo se llama tu negocio y te preparo una muestra gratis.</p>
+        <form class="hook" id="hookForm" autocomplete="off">
+          <label class="sr-only" for="hookName">Nombre de tu negocio</label>
+          <input id="hookName" name="negocio" type="text" placeholder="Nombre de tu negocio" maxlength="80" required>
+          <button type="submit">Quiero mi muestra gratis</button>
+        </form>
+        <p class="hook-note">Se abre WhatsApp con tu mensaje listo. Sin compromiso.</p>
+
+        <div class="hero-stage">
+          <div class="stage-frame" aria-hidden="true"></div>
+          <div class="phone">
+            <div class="phone-screen">
+              <div class="status-bar" aria-hidden="true"><span>9:41</span><span class="icons"><i class="sig"></i><i class="bat"></i></span></div>
+              <div class="phone-view" id="phoneView">
+                <div class="phone-loading" id="phoneLoading">Cargando web…</div>
+                <iframe id="phoneFrame" title="Muestra de web hecha por Lace para el bar El Mirador" loading="lazy" data-src="https://lacespaindev-ux.github.io/elmirador/"></iframe>
+              </div>
+            </div>
           </div>
-          <div class="trust-row" aria-label="Información sobre Lace">
-            <span class="trust-pill"><b>Ingeniero informático</b></span>
-            <span class="trust-pill"><b>+3 años</b> en datos y automatización</span>
-            <span class="trust-pill"><b>Trato directo</b>, sin intermediarios</span>
+          <div class="float-card fc-left">
+            <p class="fc-title">Antes</p>
+            <ul class="fc-list bad"><li>Sin web propia</li><li>Horario sin actualizar</li><li>La carta, solo en fotos</li></ul>
+          </div>
+          <div class="float-card fc-right">
+            <p class="fc-title">Con Lace</p>
+            <ul class="fc-list good"><li>Web con carta y horario</li><li>WhatsApp en un toque</li><li>Lista en Google y mapas</li></ul>
           </div>
         </div>
-        <div class="hero-side">
-          <a class="person-card" href="quienes-somos.html">
-            <div class="hoop"><img src="ruben.jpg" alt="Rubén, fundador de Lace" width="360" height="360"></div>
-            <div><strong>Hola, soy Rubén.</strong><span>Detrás de Lace estoy yo: te atiendo, diseño y construyo cada proyecto.</span><em>Conóceme →</em></div>
-          </a>
-          <div class="mini-services">
-            <a class="mini-service" href="webs.html"><b>Página web</b><span>pago único · sin cuotas</span></a>
-            <a class="mini-service" href="automatizaciones.html"><b>Automatización</b><span>1 semana de prueba gratis</span></a>
+        <p class="stage-caption"><b>El Mirador</b>, bar de Hoyo de Manzanares · muestra hecha por Lace · <a id="phoneOpen" href="https://lacespaindev-ux.github.io/elmirador/" target="_blank" rel="noopener">Abrir ↗</a></p>
+      </div>
+    </section>
+
+    <!-- 2. Carrusel de cifras -->
+    <section class="marquee-sec" aria-label="Cómo es trabajar con Lace">
+      <h2 class="marquee-title">Lo que te llevas con Lace</h2>
+      <div class="marquee">
+        <div class="marquee-track">
+          <article class="m-card"><b>0 €</b><span>por la muestra de tu web</span><small>La ves terminada antes de pagar</small></article>
+          <article class="m-card"><b>15 min</b><span>para contarme tu negocio</span><small>Por WhatsApp, llamada o en persona</small></article>
+          <article class="m-card"><b>7 días</b><span>de prueba gratis</span><small>En cualquier automatización</small></article>
+          <article class="m-card"><b>0 €/mes</b><span>sin cuotas ni permanencia</span><small>Pagas una vez y es tuyo</small></article>
+          <article class="m-card"><b>1 toque</b><span>para que te escriban</span><small>Botón de WhatsApp en cada pantalla</small></article>
+          <article class="m-card"><b>100%</b><span>pensada para el móvil</span><small>Donde te buscan tus clientes</small></article>
+          <article class="m-card"><b>1 persona</b><span>de principio a fin</span><small>Hablas siempre con Rubén</small></article>
+          <article class="m-card" aria-hidden="true"><b>0 €</b><span>por la muestra de tu web</span><small>La ves terminada antes de pagar</small></article>
+          <article class="m-card" aria-hidden="true"><b>15 min</b><span>para contarme tu negocio</span><small>Por WhatsApp, llamada o en persona</small></article>
+          <article class="m-card" aria-hidden="true"><b>7 días</b><span>de prueba gratis</span><small>En cualquier automatización</small></article>
+          <article class="m-card" aria-hidden="true"><b>0 €/mes</b><span>sin cuotas ni permanencia</span><small>Pagas una vez y es tuyo</small></article>
+          <article class="m-card" aria-hidden="true"><b>1 toque</b><span>para que te escriban</span><small>Botón de WhatsApp en cada pantalla</small></article>
+          <article class="m-card" aria-hidden="true"><b>100%</b><span>pensada para el móvil</span><small>Donde te buscan tus clientes</small></article>
+          <article class="m-card" aria-hidden="true"><b>1 persona</b><span>de principio a fin</span><small>Hablas siempre con Rubén</small></article>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. Pestañas de beneficios -->
+    <section class="v2-sec" id="beneficios">
+      <div class="wrap">
+        <h2 class="v2-h2 center">Con Lace tienes más visitas, más mensajes y más clientes que repiten</h2>
+        <div class="tabs" role="tablist" aria-label="Beneficios">
+          <button class="tab" role="tab" id="t1" aria-selected="true" aria-controls="p1">Más visitas en Google</button>
+          <button class="tab" role="tab" id="t2" aria-selected="false" aria-controls="p2">Más mensajes</button>
+          <button class="tab" role="tab" id="t3" aria-selected="false" aria-controls="p3">Menos citas perdidas</button>
+          <button class="tab" role="tab" id="t4" aria-selected="false" aria-controls="p4">Menos tiempo al teléfono</button>
+        </div>
+        <div class="tab-panels">
+          <div class="tab-panel" role="tabpanel" id="p1" aria-labelledby="t1">
+            <div class="tp-copy"><p class="tp-kicker">Página web</p><h3>Que te encuentren cuando te buscan</h3><p>Quien busca «bar en Hoyo» o «barbería cerca» encuentra tu web con la carta, el horario y cómo llegar, en vez de una foto vieja en Instagram.</p><a class="tp-link" href="webs.html">Ver las webs →</a></div>
+            <div class="tp-visual">
+              <div class="mock-search">
+                <div class="ms-bar">bar en hoyo de manzanares</div>
+                <div class="ms-result top"><small>lacespaindev-ux.github.io › elmirador</small><b>El Mirador · Bar en Hoyo de Manzanares</b><span>Carta, horario y reservas por WhatsApp. Abierto hoy hasta las 23:00.</span></div>
+                <div class="ms-result"><small>instagram.com</small><b>Un bar cualquiera</b><span>Sin horario. Última publicación hace 2 años.</span></div>
+              </div>
+            </div>
+          </div>
+          <div class="tab-panel" role="tabpanel" id="p2" aria-labelledby="t2" hidden>
+            <div class="tp-copy"><p class="tp-kicker">Página web</p><h3>Que te escriban en un toque</h3><p>Un botón de WhatsApp o llamada en cada pantalla. El cliente que quiere reservar o preguntar no tiene que buscar tu número.</p><a class="tp-link" href="webs.html">Ver las webs →</a></div>
+            <div class="tp-visual">
+              <div class="mock-chat">
+                <div class="mc-head"><span class="mc-av">B</span><b>Bar de la plaza</b></div>
+                <div class="mc-msg in">Hola! ¿Tenéis mesa para 4 este sábado a las 14:30?</div>
+                <div class="mc-msg out">¡Hola! Sí, os la apunto a nombre de quién? 😊</div>
+                <div class="mc-msg in">De Laura. ¡Gracias!</div>
+              </div>
+            </div>
+          </div>
+          <div class="tab-panel" role="tabpanel" id="p3" aria-labelledby="t3" hidden>
+            <div class="tp-copy"><p class="tp-kicker">Automatización</p><h3>Menos huecos vacíos en tu agenda</h3><p>El día antes, tu cliente recibe un recordatorio por WhatsApp. Confirma o avisa, y tú puedes llenar ese hueco con otro.</p><a class="tp-link" href="automatizaciones.html">Ver automatizaciones →</a></div>
+            <div class="tp-visual">
+              <div class="mock-chat">
+                <div class="mc-head"><span class="mc-av">P</span><b>Peluquería del barrio</b></div>
+                <div class="mc-msg out">Hola Marta 👋 Te recordamos tu cita mañana jueves a las 17:00. ¿Nos confirmas?</div>
+                <div class="mc-btns"><span>✓ Confirmo</span><span>Cambiar cita</span></div>
+                <div class="mc-msg in">Confirmo, ¡hasta mañana!</div>
+              </div>
+            </div>
+          </div>
+          <div class="tab-panel" role="tabpanel" id="p4" aria-labelledby="t4" hidden>
+            <div class="tp-copy"><p class="tp-kicker">Automatización</p><h3>Las preguntas de siempre se contestan solas</h3><p>Horarios, precios, si hay mesa o cita libre. Las dudas repetidas se responden al momento, también de madrugada, y tú atiendes lo que importa.</p><a class="tp-link" href="automatizaciones.html">Ver automatizaciones →</a></div>
+            <div class="tp-visual">
+              <div class="mock-chat">
+                <div class="mc-head"><span class="mc-av">C</span><b>Clínica de fisioterapia</b></div>
+                <div class="mc-msg in">¿A qué hora abrís el sábado? 00:47</div>
+                <div class="mc-msg out">¡Hola! Los sábados abrimos de 9:00 a 14:00. ¿Quieres que te busque hueco?</div>
+                <div class="mc-tag">Respuesta automática</div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </section>
 
-    <section class="section" id="servicios">
-      <div class="wrap">
-        <div class="section-head">
-          <p class="eyebrow">Servicios</p>
-          <h2>Dos servicios. Elige lo que necesita tu negocio.</h2>
-          <p>Puedes contratar uno, otro o los dos. Te digo el precio cerrado antes de empezar y se paga una sola vez.</p>
+    <!-- 4. Prueba en directo (en lugar de reseñas) -->
+    <section class="v2-sec soft" id="pruebalo">
+      <div class="wrap live-grid">
+        <div class="live-copy">
+          <p class="tp-kicker">Pruébalo ahora</p>
+          <h2 class="v2-h2">Habla con un asistente que trabaja solo</h2>
+          <p class="v2-p">Este chat es una automatización de verdad: responde una IA con la información de Lace, a cualquier hora. Algo así puede atender a los clientes de tu negocio.</p>
+          <ul class="ticks"><li>Responde al momento, también de noche</li><li>Conoce tus horarios, precios y servicios</li><li>Te pasa la conversación cuando hace falta una persona</li></ul>
         </div>
-        <div class="services">
-          <a class="service" href="webs.html">
-            <div class="service-top"><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M7 6.5h.01M10 6.5h.01M7 13h6M7 16h10"/></svg></span><span class="eyebrow" style="margin:0">Servicio 01</span></div>
-            <h3>Página web</h3>
-            <p>Para que quien te busque en Google vea tu carta o servicios, tu horario y cómo llegar, y te escriba en un toque.</p>
-            <p class="price-line">Pago único · sin cuotas mensuales</p>
-            <ul class="check-list"><li>Diseño a medida, pensado para el móvil</li><li>Carta o servicios, horario y mapa</li><li>Botón directo a WhatsApp o llamada</li><li>Te la enseño terminada antes de pagar</li></ul>
-            <span class="link">Ver webs y ejemplos →</span>
-          </a>
-          <a class="service" href="automatizaciones.html">
-            <div class="service-top"><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 12a8 8 0 0 1 13.7-5.6L20 9"/><path d="M20 4v5h-5"/><path d="M20 12a8 8 0 0 1-13.7 5.6L4 15"/><path d="M4 20v-5h5"/></svg></span><span class="eyebrow" style="margin:0">Servicio 02</span></div>
-            <h3>Automatizaciones</h3>
-            <p>Para las tareas que se repiten cada semana: recordatorios de citas, respuestas a las mismas preguntas, publicaciones…</p>
-            <p class="price-line">Prueba gratis · pago único si te sirve</p>
-            <ul class="check-list"><li>Sistemas a medida de tu forma de trabajar</li><li>WhatsApp, Instagram, hojas de cálculo…</li><li>Una semana de prueba gratis</li><li>Si no te sirve, no pagas</li></ul>
-            <span class="link">Ver automatizaciones →</span>
-          </a>
+        <aside class="demo-wrap" aria-label="Chat con el asistente de Lace">
+          <div class="sample">
+            <div class="sample-head">
+              <div class="avatar" aria-hidden="true">L</div>
+              <div><strong>Lace · asistente</strong><span class="online">En línea</span></div>
+            </div>
+            <div class="chat" id="demoMsgs">
+              <div class="chat-log" id="demoLog" aria-live="polite">
+                <span class="day">Hoy</span>
+                <div class="bubble">¡Hola! Soy del equipo de LaceDev, ¿qué necesitas?</div>
+              </div>
+            </div>
+            <div class="sample-questions" aria-label="Preguntas de ejemplo">
+              <button class="chip" type="button" data-q="¿Cuánto cuesta una web para mi bar?">¿Cuánto cuesta una web?</button>
+              <button class="chip" type="button" data-q="¿Podéis enviar recordatorios de citas por WhatsApp?">¿Recordatorios?</button>
+              <button class="chip" type="button" data-q="¿Cómo funciona la muestra gratis?">¿Cómo funciona?</button>
+            </div>
+            <form class="chat-form" id="demoForm">
+              <label class="sr-only" for="demoInput">Escribe tu mensaje</label>
+              <input id="demoInput" type="text" autocomplete="off" placeholder="Escribe tu pregunta…" maxlength="400">
+              <button type="submit" aria-label="Enviar">→</button>
+            </form>
+          </div>
+          <p class="demo-note">Las conversaciones se guardan para mejorar el servicio.</p>
+        </aside>
+      </div>
+    </section>
+
+    <!-- 5. Lo de las grandes cadenas -->
+    <section class="v2-sec">
+      <div class="wrap">
+        <h2 class="v2-h2 center">Lo que tienen las grandes cadenas, para el negocio de tu pueblo</h2>
+        <div class="big3">
+          <article class="b3-card">
+            <div class="b3-art art-web"><div class="aw-top"></div><div class="aw-hero">Carta · Horario · Cómo llegar</div><div class="aw-row"><i></i><i></i><i></i></div><div class="aw-btn">Escribir por WhatsApp</div></div>
+            <h3>Una web que vende</h3>
+            <p>Hecha a medida para tu negocio, rápida en el móvil y fácil de encontrar en Google.</p>
+          </article>
+          <article class="b3-card">
+            <div class="b3-art art-wa"><div class="mc-msg in">¿Hacéis pedidos para llevar?</div><div class="mc-msg out">¡Sí! Te paso la carta 👇</div></div>
+            <h3>WhatsApp que contesta</h3>
+            <p>Respuestas automáticas a las preguntas de siempre, con tu forma de hablar.</p>
+          </article>
+          <article class="b3-card">
+            <div class="b3-art art-cal"><div class="cal-day"><b>Jue</b><span>17:00</span></div><div class="cal-day"><b>Vie</b><span>10:30</span></div><div class="cal-day ok"><b>Sáb</b><span>Confirmada</span></div></div>
+            <h3>Recordatorios que llenan la agenda</h3>
+            <p>Tus clientes confirman su cita por WhatsApp y tú sabes con tiempo quién no viene.</p>
+          </article>
         </div>
       </div>
     </section>
 
-    <section class="section" id="como-trabajo">
+    <!-- 6. Webs en directo (caso) -->
+    <section class="v2-sec soft" id="casos">
       <div class="wrap">
-        <div class="section-head">
-          <p class="eyebrow">Cómo trabajo</p>
-          <h2>Primero lo ves. Luego decides.</h2>
-          <p>El mismo proceso para webs y automatizaciones: nada de pagos por adelantado ni permanencias.</p>
+        <h2 class="v2-h2 center">Así quedan las webs que hacemos</h2>
+        <article class="case">
+          <div class="case-media">
+            <div class="case-browser"><div class="cb-bar"><i></i><i></i><i></i><span>lacespaindev-ux.github.io/elmirador</span></div><div class="cb-body"><b>El Mirador</b><span>Bar · Hoyo de Manzanares</span></div></div>
+          </div>
+          <div class="case-copy">
+            <p class="tp-kicker">Muestra · Bar en Hoyo de Manzanares</p>
+            <blockquote>«Un bar del pueblo que solo tenía una ficha de Google. Le hicimos una web con su carta, su horario y un botón de WhatsApp para reservar.»</blockquote>
+            <p class="case-by">Rubén, Lace</p>
+            <ul class="case-stats"><li><b>Carta</b><span>siempre actualizada</span></li><li><b>1 toque</b><span>para reservar por WhatsApp</span></li></ul>
+            <div class="case-actions"><a class="button" href="https://lacespaindev-ux.github.io/elmirador/" target="_blank" rel="noopener">Ver la web ↗</a><a class="button secondary" href="webs.html">Más sobre las webs</a></div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- 7. Tres creencias -->
+    <section class="v2-sec" id="lo-que-creemos">
+      <div class="wrap">
+        <h2 class="v2-h2 center">Tres cosas en las que creemos</h2>
+        <div class="founder">
+          <img src="ruben.jpg" alt="Rubén, fundador de Lace" width="72" height="72">
+          <div><b>Rubén</b><span>Fundador de Lace · ingeniero informático</span></div>
         </div>
-        <div class="steps">
-          <article class="step-card"><h3>Hablamos 15 minutos</h3><p>Por WhatsApp, llamada o en persona si estás cerca. Me cuentas qué necesitas, sin formularios largos.</p></article>
-          <article class="step-card"><h3>Te preparo una muestra</h3><p>La web terminada o el sistema funcionando, gratis y antes de que tengas que decidir nada.</p></article>
-          <article class="step-card"><h3>Decides tú</h3><p>Antes de empezar te digo el precio cerrado. Si te convence, lo pagas una sola vez; si no te sirve, no pagas.</p></article>
+        <div class="beliefs3">
+          <article><h3>Primero lo ves, luego decides.</h3><p>Nadie debería pagar por adelantado algo que no ha visto. Te enseño tu web o tu sistema funcionando antes de hablar de dinero.</p></article>
+          <article><h3>Un pago y es tuyo.</h3><p>Sin cuotas mensuales que no sabes para qué son. Los cambios pequeños, como la carta, el horario o unas fotos nuevas, van incluidos.</p></article>
+          <article><h3>Lo útil antes que lo bonito.</h3><p>Cada cosa que hago tiene que traerte clientes o ahorrarte tiempo. Si no lo hace, no te la vendo.</p></article>
         </div>
       </div>
     </section>
-    <section class="section">
+
+    <!-- 8. Cómo trabajo -->
+    <section class="v2-sec soft" id="como-trabajo">
       <div class="wrap">
-        <div class="cta-band">
-          <h2>¿Hablamos de tu negocio?</h2>
-          <p>Escríbeme por WhatsApp y cuéntame qué necesitas. Te respondo yo, normalmente en menos de 24 horas.</p>
-          <div class="actions"><a class="button light" href="https://wa.me/34614443890?text=Hola%2C%20quiero%20hablar%20sobre%20mi%20negocio">Escribir por WhatsApp <span aria-hidden="true">→</span></a><a class="button ghost" href="contacto.html">Otras formas de contacto</a></div>
+        <h2 class="v2-h2 center">De la primera charla a tu web en marcha</h2>
+        <div class="steps3">
+          <article><span class="s-num">1</span><h3>Hablamos 15 minutos</h3><p>Por WhatsApp, llamada o en persona si estás cerca. Me cuentas qué necesitas.</p></article>
+          <article><span class="s-num">2</span><h3>Te preparo una muestra</h3><p>La web terminada o el sistema funcionando, gratis y antes de que decidas nada.</p></article>
+          <article><span class="s-num">3</span><h3>Decides tú</h3><p>Te digo el precio cerrado. Si te convence, pagas una vez; si no te sirve, no pagas.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <!-- 9. Cierre con móvil -->
+    <section class="final-cta">
+      <div class="wrap final-grid">
+        <div class="final-copy">
+          <h2>La forma más fácil de conseguir clientes para tu negocio.</h2>
+          <div class="actions"><a class="button light" href="https://wa.me/34614443890?text=Hola%2C%20quiero%20una%20muestra%20gratis%20para%20mi%20negocio">Pedir mi muestra gratis</a><a class="button ghost" href="index.html#como-trabajo">Ver cómo funciona</a></div>
+          <p class="final-num">WhatsApp de Lace: <b>614 44 38 90</b></p>
+        </div>
+        <div class="final-phone" aria-hidden="true">
+          <div class="mini-phone">
+            <div class="mp-head"><span class="mc-av">L</span><b>Lace</b><small>en línea</small></div>
+            <div class="mc-msg in">Hola, quiero una muestra gratis para mi negocio: Bar La Plaza.</div>
+            <div class="mc-msg out">¡Hola! Soy Rubén. Me pongo con ella y te la paso hoy mismo 😊</div>
+          </div>
         </div>
       </div>
     </section>
   </main>
 
-  <footer>
-    <div class="wrap footer-row"><span>© <span id="year">2026</span> Lace · Madrid · lacespaindev@gmail.com</span><div class="footer-links"><a href="webs.html">Webs</a><a href="automatizaciones.html">Automatizaciones</a><a href="quienes-somos.html">Quiénes somos</a><a href="contacto.html">Contacto</a></div></div>
+  <!--FOOTER-->
+  <footer class="mega-footer">
+    <div class="wrap mf-grid">
+      <div class="mf-brand"><a class="brand" href="index.html">Lace<span class="brand-dot">.</span></a><p>Webs y automatizaciones para negocios locales.</p><a class="button" href="https://wa.me/34614443890?text=Hola%2C%20quiero%20una%20muestra%20gratis%20para%20mi%20negocio">Muestra gratis</a></div>
+      <div><p class="mf-title">Que te encuentren</p><a href="webs.html">Página web</a><a href="webs.html#en-directo">Webs en directo</a></div>
+      <div><p class="mf-title">Que te escriban y vuelvan</p><a href="automatizaciones.html">Respuestas automáticas</a><a href="automatizaciones.html">Recordatorios de citas</a><a href="automatizaciones.html">Automatizaciones a medida</a></div>
+      <div><p class="mf-title">Lace</p><a href="quienes-somos.html">Quiénes somos</a><a href="index.html#como-trabajo">Cómo trabajo</a><a href="contacto.html">Contacto</a></div>
+      <div><p class="mf-title">Contacto</p><span>WhatsApp: 614 44 38 90</span><span>lacespaindev@gmail.com</span><span>Madrid</span></div>
+    </div>
+    <div class="wrap mf-bottom"><span>© <span id="year">2026</span> Lace. Todos los derechos reservados.</span></div>
   </footer>
+  <!--/FOOTER-->
   <a class="wa-float" id="waFloat" href="https://wa.me/34614443890?text=Hola%2C%20quiero%20hablar%20sobre%20mi%20negocio" aria-label="Escribir a Lace por WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2c-1.5 0-3-.4-4.3-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.2.3-.9.9-.9 2.2s.9 2.5 1 2.7c.1.2 1.8 2.8 4.4 3.9 1.6.7 2.3.8 3.1.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.5-.3Z"/></svg><span>Escríbeme</span></a>
   <script src="site.js"></script>
 </body>
