@@ -719,3 +719,10 @@ body.v2 { background: var(--paper); }
 }
 [hidden] { display: none !important; }
 .v2 .avatar { font: 800 18px var(--serif); background: var(--forest); color: var(--on-forest); }
+
+/* Trabajos */
+.work-copy h2 { margin-bottom: 12px; }
+.work-intro { max-width: 520px; color: #4f5a53; font-size: 16px; line-height: 1.7; }
+.work-meta { display: flex; flex-wrap: wrap; gap: 10px; margin: 22px 0 4px; }
+.work-meta span { display: grid; gap: 2px; padding: 10px 14px; border: 1px dashed var(--line); border-radius: var(--radius, 3px); background: rgba(250,248,241,.6); font-size: 13px; color: var(--ink); }
+.work-meta b { color: var(--wine); font: 700 9px/1.4 var(--mono); letter-spacing: .1em; text-transform: uppercase; }
