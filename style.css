@@ -203,7 +203,7 @@ footer { padding: 22px 0 30px; border-top: 1px solid var(--line); color: var(--m
 .web-pick small { grid-column: 1; color: var(--muted); font-size: 12px; }
 .web-pick .tag { grid-row: 1 / span 2; grid-column: 2; padding: 4px 8px; border: 1px dashed var(--line); color: var(--muted); font: 700 9px var(--mono); letter-spacing: .1em; text-transform: uppercase; }
 .phone-stage { display: grid; justify-items: center; gap: 14px; }
-.phone { position: relative; width: min(330px, 100%); aspect-ratio: 9 / 18.5; padding: 11px; border-radius: 42px; background: #231d1a; box-shadow: 0 30px 70px rgba(40,30,22,.22), inset 0 0 0 2px #3a302b; }
+.phone { position: relative; width: min(350px, 100%); aspect-ratio: 9 / 18; padding: 11px; border-radius: 42px; background: #231d1a; box-shadow: 0 30px 70px rgba(40,30,22,.22), inset 0 0 0 2px #3a302b; }
 .phone::before { content: ""; position: absolute; z-index: 2; top: 19px; left: 50%; width: 84px; height: 22px; border-radius: 99px; background: #231d1a; transform: translateX(-50%); }
 .phone-screen { position: relative; display: flex; flex-direction: column; width: 100%; height: 100%; overflow: hidden; border-radius: 32px; background: #fff; }
 .status-bar { flex: none; height: 40px; display: flex; align-items: center; justify-content: space-between; padding: 6px 26px 0; background: #fff; color: #1a1a1a; font: 600 12px var(--sans); }
@@ -212,7 +212,7 @@ footer { padding: 22px 0 30px; border-top: 1px solid var(--line); color: var(--m
 .status-bar .sig { width: 15px; height: 9px; clip-path: polygon(0 100%, 100% 0, 100% 100%); }
 .status-bar .bat { width: 21px; height: 10px; border-radius: 3px; box-shadow: inset 0 0 0 1.5px #1a1a1a; background: linear-gradient(90deg, #1a1a1a 70%, transparent 70%) !important; background-clip: content-box !important; padding: 2px; }
 .phone-view { position: relative; flex: 1; overflow: hidden; background: var(--paper-2); }
-.phone-view iframe { position: absolute; top: 0; left: 0; width: 390px; border: 0; background: #fff; transform-origin: 0 0; }
+.phone-view iframe { position: absolute; top: 0; left: 0; width: 430px; border: 0; background: #fff; transform-origin: 0 0; }
 .phone-loading { position: absolute; inset: 0; display: grid; place-items: center; color: var(--muted); font: 11px var(--mono); letter-spacing: .08em; transition: opacity .3s; }
 .phone-loading.hide { opacity: 0; pointer-events: none; }
 .phone-caption { color: var(--muted); font-size: 12px; text-align: center; }
@@ -242,7 +242,7 @@ footer { padding: 22px 0 30px; border-top: 1px solid var(--line); color: var(--m
   .nav-links a:last-child { border-bottom: 0; }
   .nav-cta { min-height: 38px; padding: 0 11px; font-size: 11px; }
   .live-webs { grid-template-columns: 1fr; }
-  .phone { width: min(300px, 100%); }
+  .phone { width: min(320px, 100%); }
   .wa-float span { display: none; }
   .wa-float { padding: 13px; }
   .brand { font-size: 21px; }
@@ -529,7 +529,7 @@ body.v2 { background: var(--paper); }
 .hero-stage { position: relative; width: min(860px, 100%); margin-top: 44px; padding: 44px 0 0; display: flex; justify-content: center; }
 .stage-frame { position: absolute; inset: 120px 0 0; border-radius: 32px 32px 0 0; background: linear-gradient(135deg, var(--forest) 0%, var(--forest-2) 55%, #3d5c45 100%); overflow: hidden; }
 .stage-frame::after { content: ""; position: absolute; inset: 0; background: repeating-radial-gradient(circle at 80% 120%, transparent 0 38px, rgba(243,239,230,.05) 38px 39px); }
-.v2-hero .phone { position: relative; z-index: 1; width: min(310px, 78%); background: #13221a; box-shadow: 0 40px 80px -20px rgba(5,14,9,.55), inset 0 0 0 2px #2c4537; }
+.v2-hero .phone { position: relative; z-index: 1; width: min(340px, 82%); background: #13221a; box-shadow: 0 40px 80px -20px rgba(5,14,9,.55), inset 0 0 0 2px #2c4537; }
 .v2-hero .phone::before { background: #13221a; }
 .float-card { position: absolute; z-index: 2; width: 220px; padding: 16px 18px; border-radius: 18px; background: var(--card); box-shadow: 0 24px 50px -18px rgba(5,14,9,.45); text-align: left; }
 .fc-left { left: 2%; top: 190px; }

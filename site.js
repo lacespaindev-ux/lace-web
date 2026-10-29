@@ -46,7 +46,7 @@
     frame.src = src; open.href = src;
   }
   function fit() {
-    var s = view.clientWidth / 390;
+    var s = view.clientWidth / 430;
     frame.style.transform = 'scale(' + s + ')';
     frame.style.height = (view.clientHeight / s) + 'px';
   }
