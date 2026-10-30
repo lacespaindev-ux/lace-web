@@ -59,6 +59,26 @@
   } else { show(picks[0] || null); }
 })();
 
+/* Móviles extra (un bloque por cliente en trabajos.html) */
+(function () {
+  document.querySelectorAll('iframe.phone-frame').forEach(function (frame) {
+    var view = frame.parentNode;
+    var loading = view.querySelector('.phone-loading');
+    function fit() {
+      var s = view.clientWidth / 430;
+      frame.style.transform = 'scale(' + s + ')';
+      frame.style.height = (view.clientHeight / s) + 'px';
+    }
+    fit(); addEventListener('resize', fit);
+    frame.addEventListener('load', function () { if (frame.src && loading) loading.classList.add('hide'); });
+    function load() { frame.src = frame.getAttribute('data-src'); }
+    if ('IntersectionObserver' in window) {
+      var once = new IntersectionObserver(function (en) { if (en[0].isIntersecting) { load(); once.disconnect(); } }, { rootMargin: '300px' });
+      once.observe(frame);
+    } else { load(); }
+  });
+})();
+
 /* Chat con IA en directo */
 (function () {
   var log = document.getElementById('demoLog');
