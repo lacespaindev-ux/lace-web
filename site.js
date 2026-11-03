@@ -190,3 +190,18 @@
     });
   });
 })();
+
+/* Trabajos: flechas del carrusel */
+(function () {
+  var rail = document.getElementById('workRail');
+  if (!rail) return;
+  var btns = document.querySelectorAll('.work-arrow');
+  function step() { var s = rail.querySelector('.work-slide'); return s ? s.getBoundingClientRect().width + parseFloat(getComputedStyle(rail).columnGap || 24) : 340; }
+  function update() {
+    var max = rail.scrollWidth - rail.clientWidth - 2;
+    btns.forEach(function (b) { b.disabled = b.dataset.dir < 0 ? rail.scrollLeft <= 2 : rail.scrollLeft >= max; });
+    rail.parentNode.classList.toggle('is-static', max <= 0);
+  }
+  btns.forEach(function (b) { b.addEventListener('click', function () { rail.scrollBy({ left: step() * b.dataset.dir, behavior: 'smooth' }); }); });
+  rail.addEventListener('scroll', update, { passive: true }); addEventListener('resize', update); update();
+})();

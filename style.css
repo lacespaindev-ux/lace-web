@@ -726,3 +726,22 @@ body.v2 { background: var(--paper); }
 .work-meta { display: flex; flex-wrap: wrap; gap: 10px; margin: 22px 0 4px; }
 .work-meta span { display: grid; gap: 2px; padding: 10px 14px; border: 1px dashed var(--line); border-radius: var(--radius, 3px); background: rgba(250,248,241,.6); font-size: 13px; color: var(--ink); }
 .work-meta b { color: var(--wine); font: 700 9px/1.4 var(--mono); letter-spacing: .1em; text-transform: uppercase; }
+
+/* Trabajos: carrusel horizontal de móviles */
+.work-section { padding-top: 8px; }
+.work-head { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 18px; }
+.work-hint { margin: 0; color: var(--muted); font: 700 11px/1 var(--mono); letter-spacing: .1em; text-transform: uppercase; }
+.work-arrows { display: flex; gap: 8px; }
+.work-arrow { display: grid; place-items: center; width: 46px; height: 46px; border: 1px solid var(--line); border-radius: 99px; background: #fbf9f4; color: #1f3a2e; font-size: 18px; cursor: pointer; transition: background .2s, color .2s, opacity .2s; }
+.work-arrow:hover { background: #1f3a2e; color: #f3efe6; }
+.work-arrow:disabled { opacity: .35; cursor: default; background: #fbf9f4; color: #1f3a2e; }
+.work-rail { display: flex; gap: clamp(20px, 3vw, 36px); overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding-inline: max(20px, calc((100vw - 1180px) / 2)); padding: 10px max(20px, calc((100vw - 1180px) / 2)) 34px; scrollbar-width: none; overscroll-behavior-x: contain; }
+.work-rail::-webkit-scrollbar { display: none; }
+.work-rail:focus-visible { outline: 2px solid #b5502a; outline-offset: 4px; }
+.work-slide { flex: 0 0 auto; width: min(330px, 78vw); scroll-snap-align: start; display: grid; gap: 22px; }
+.work-slide .phone { width: 100%; }
+.work-slide-copy h2 { margin: 6px 0 8px; font-size: clamp(24px, 3vw, 30px); }
+.work-slide-copy p:not(.eyebrow) { margin: 0 0 14px; color: #4f5a53; font-size: 15px; line-height: 1.6; }
+.work-link { color: #b5502a; font-weight: 650; text-underline-offset: 3px; word-break: break-all; }
+@media (max-width: 720px) { .work-arrows { display: none; } }
+.work-section.is-static .work-head { visibility: hidden; height: 0; margin: 0; }
