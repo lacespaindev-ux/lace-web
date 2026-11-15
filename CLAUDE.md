@@ -4,7 +4,7 @@ Web de Lace, el negocio de Rubén (webs y automatizaciones para negocios locales
 
 ## Estructura
 - Páginas: `index.html`, `webs.html`, `automatizaciones.html`, `trabajos.html`, `quienes-somos.html`, `contacto.html`. Cabecera y pie están repetidos en cada página: un cambio de menú o pie va en todas.
-- `style.css` y `site.js` compartidos. Al cambiarlos, subir el `?v=N` de sus enlaces en todas las páginas para saltar la caché (`style.css` va por `v=6`, `site.js` por `v=5`).
+- `style.css` y `site.js` compartidos. Al cambiarlos, subir el `?v=N` de sus enlaces en todas las páginas para saltar la caché (`style.css` va por `v=7`, `site.js` por `v=6`).
 - Paleta: arena `#f3efe6`, verde bosque `#1f3a2e`, terracota `#b5502a`. Tipografías Bricolage Grotesque, Archivo y Space Mono.
 
 ## Contenido decidido por Rubén

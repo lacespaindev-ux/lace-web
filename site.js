@@ -153,19 +153,35 @@
   });
 })();
 
-/* Desplegable de servicios (escritorio) */
+/* Desplegable de servicios: hover + clic en escritorio, acordeón en el menú móvil */
 (function () {
   var drop = document.getElementById('navDrop');
   var btn = document.getElementById('navDropBtn');
   if (!drop || !btn) return;
-  function set(open) { drop.classList.toggle('open', open); btn.setAttribute('aria-expanded', open ? 'true' : 'false'); }
-  btn.addEventListener('click', function (e) { e.stopPropagation(); set(!drop.classList.contains('open')); });
-  if (window.matchMedia('(hover: hover)').matches) {
-    drop.addEventListener('mouseenter', function () { set(true); });
-    drop.addEventListener('mouseleave', function () { set(false); });
+  var hover = window.matchMedia('(hover: hover) and (min-width: 641px)');
+  var timer;
+  function set(open) {
+    clearTimeout(timer);
+    drop.classList.toggle('open', open);
+    btn.setAttribute('aria-expanded', open ? 'true' : 'false');
   }
+  btn.addEventListener('click', function (e) {
+    e.stopPropagation();
+    // con ratón ya se abrió al pasar por encima: el clic no debe cerrarlo
+    if (hover.matches) set(true); else set(!drop.classList.contains('open'));
+  });
+  drop.addEventListener('mouseenter', function () { if (hover.matches) set(true); });
+  drop.addEventListener('mouseleave', function () {
+    if (!hover.matches) return;
+    clearTimeout(timer);
+    timer = setTimeout(function () { set(false); }, 250);
+  });
+  drop.addEventListener('focusout', function (e) { if (hover.matches && !drop.contains(e.relatedTarget)) set(false); });
   document.addEventListener('click', function (e) { if (!drop.contains(e.target)) set(false); });
-  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') set(false); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') { set(false); } });
+  // al cerrar el menú móvil, el acordeón vuelve a cerrarse
+  var toggle = document.getElementById('menuToggle');
+  if (toggle) toggle.addEventListener('click', function () { set(false); });
 })();
 
 /* Pestañas de beneficios */

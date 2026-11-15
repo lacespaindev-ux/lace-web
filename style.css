@@ -828,3 +828,21 @@ body.v2 { background: var(--paper); }
   .aud-fix { grid-template-columns: 1fr; }
   .aud-card { border-radius: 22px; }
 }
+
+/* ---------- Desplegable de servicios (arreglo 15 nov 2026) ---------- */
+/* puente invisible entre el botón y el menú para que no se cierre al bajar el ratón */
+.mega::before { content: ""; position: absolute; left: 0; right: 0; top: -18px; height: 18px; }
+@media (min-width: 641px) and (max-width: 1000px) {
+  .mega { position: fixed; top: 70px; left: 16px; right: 16px; grid-template-columns: repeat(3, 1fr); }
+  .mega::before { top: -24px; height: 24px; }
+}
+@media (max-width: 640px) {
+  .nav-links { max-height: calc(100vh - 62px); max-height: calc(100dvh - 62px); overflow-y: auto; overscroll-behavior: contain; }
+  .nav-drop { border-bottom: 1px dashed var(--line); }
+  .nav-drop-btn { display: flex; justify-content: space-between; width: 100%; padding: 13px 2px; color: var(--ink); font: 500 20px var(--serif); }
+  .nav-drop-btn span { font-size: 13px; }
+  .mega { display: none; padding: 0 0 8px 12px; }
+  .mega::before { display: none; }
+  .nav-drop.open .mega { display: grid; }
+  .mega a:last-child { border-bottom: 0; }
+}
