@@ -745,3 +745,86 @@ body.v2 { background: var(--paper); }
 .work-link { color: #b5502a; font-weight: 650; text-underline-offset: 3px; word-break: break-all; }
 @media (max-width: 720px) { .work-arrows { display: none; } }
 .work-section.is-static .work-head { visibility: hidden; height: 0; margin: 0; }
+
+/* ---------- Auditoría gratis (auditoria.html) ---------- */
+.aud-hero { padding: 64px 0 28px; text-align: center; background: radial-gradient(1100px 460px at 50% 100%, #e3dccb 0%, transparent 70%), var(--paper); }
+.aud-hero-inner { display: flex; flex-direction: column; align-items: center; }
+.aud-hero h1 { max-width: 860px; margin: 0 auto 16px; color: var(--forest); font-size: clamp(38px, 6vw, 70px); line-height: 1.02; letter-spacing: -.045em; text-wrap: balance; }
+.aud-hero .lead { margin-inline: auto; }
+.aud-facts { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; margin: 10px 0 0; padding: 0; list-style: none; }
+.aud-facts li { display: flex; align-items: baseline; gap: 6px; padding: 8px 16px; border: 1px solid var(--line); border-radius: 99px; background: var(--card); }
+.aud-facts b { color: var(--forest); font: 700 18px var(--serif); }
+.aud-facts span { color: var(--muted); font: 12px var(--mono); }
+.aud-sec { padding: 20px 0 96px; }
+.aud-card { position: relative; max-width: 780px; margin: 0 auto; padding: clamp(24px, 5vw, 48px); border: 1px solid var(--line); border-radius: 28px; background: var(--card); box-shadow: 0 30px 60px -36px rgba(29,39,33,.35); }
+.aud-step { display: none; }
+.aud-step.is-on { display: block; animation: audIn .35s ease; }
+@keyframes audIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+.aud-q-num { margin: 0 0 10px; color: var(--wine); font: 700 11px var(--mono); letter-spacing: .1em; text-transform: uppercase; }
+.v2 .aud-q { max-width: none; margin: 0 0 8px; color: var(--forest); font-size: clamp(24px, 3.4vw, 34px); line-height: 1.12; letter-spacing: -.03em; text-wrap: balance; }
+.aud-help { margin: 0 0 22px; color: var(--muted); }
+.aud-start { display: flex; gap: 10px; flex-wrap: wrap; }
+.aud-start input { flex: 1 1 240px; min-height: 52px; padding: 0 18px; border: 1px solid var(--line); border-radius: 99px; background: #fffdf8; color: var(--ink); font: 16px var(--sans); }
+.aud-start input:focus { outline: 2px solid var(--terra); outline-offset: 1px; }
+.v2 .aud-start .button { min-height: 52px; }
+.aud-private { margin: 16px 0 0; color: var(--muted); font: 12px var(--mono); }
+.aud-progress { height: 6px; margin-bottom: 22px; border-radius: 99px; background: var(--soft); overflow: hidden; }
+.aud-progress i { display: block; height: 100%; width: 0; border-radius: inherit; background: var(--terra); transition: width .35s ease; }
+.aud-top { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+.aud-back { border: 0; background: none; color: var(--muted); font: 13px var(--sans); cursor: pointer; padding: 4px 0; }
+.aud-back:hover { color: var(--ink); }
+.aud-opts { display: grid; gap: 10px; }
+.aud-opt { display: flex; align-items: center; gap: 14px; width: 100%; min-height: 58px; padding: 14px 18px; border: 1px solid var(--line); border-radius: 16px; background: #fffdf8; color: var(--ink); font: 500 16px/1.35 var(--sans); text-align: left; cursor: pointer; transition: border-color .15s, background .15s, transform .15s; }
+.aud-opt:hover { border-color: var(--forest); transform: translateY(-1px); }
+.aud-dot { flex: none; width: 20px; height: 20px; border: 2px solid var(--line); border-radius: 50%; transition: all .15s; }
+.aud-opt.is-sel { border-color: var(--forest); background: #eef1ea; }
+.aud-opt.is-sel .aud-dot { border: 6px solid var(--forest); }
+.aud-score { display: grid; grid-template-columns: auto 1fr; gap: 28px; align-items: center; margin-bottom: 28px; }
+.aud-ring { --p: 0; --c: var(--terra); position: relative; display: grid; place-items: center; width: 150px; height: 150px; border-radius: 50%; background: conic-gradient(var(--c) calc(var(--p) * 1%), var(--soft) 0); transition: --p 1s; }
+.aud-ring::before { content: ""; position: absolute; inset: 14px; border-radius: 50%; background: var(--card); }
+.aud-ring[data-level="low"] { --c: #c4452a; }
+.aud-ring[data-level="mid"] { --c: var(--terra); }
+.aud-ring[data-level="high"] { --c: var(--green); }
+.aud-ring b, .aud-ring span { position: relative; }
+.aud-ring b { color: var(--forest); font: 800 46px/1 var(--serif); letter-spacing: -.04em; margin-top: 18px; }
+.aud-ring span { color: var(--muted); font: 12px var(--mono); margin-top: -34px; }
+@property --p { syntax: "<number>"; inherits: true; initial-value: 0; }
+.aud-areas { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 36px; }
+.aud-area { padding: 14px 16px; border: 1px solid var(--line); border-radius: 16px; background: #fffdf8; }
+.aud-area-top { display: flex; justify-content: space-between; gap: 8px; margin-bottom: 8px; font-size: 14px; font-weight: 600; }
+.aud-area-top b { font: 700 13px var(--mono); }
+.aud-meter { height: 6px; border-radius: 99px; background: var(--soft); overflow: hidden; }
+.aud-meter i { display: block; height: 100%; border-radius: inherit; background: var(--terra); }
+.aud-area[data-level="low"] .aud-meter i { background: #c4452a; }
+.aud-area[data-level="high"] .aud-meter i { background: var(--green); }
+.v2 .aud-h3 { margin: 0 0 14px; color: var(--forest); font-size: 22px; }
+.aud-fixes { display: grid; gap: 12px; margin-bottom: 36px; }
+.aud-fix { display: grid; grid-template-columns: 40px 1fr; gap: 14px; padding: 20px; border: 1px solid var(--line); border-radius: 18px; background: #fffdf8; }
+.aud-fix-n { display: grid; place-items: center; width: 36px; height: 36px; border-radius: 50%; background: var(--forest); color: var(--on-forest); font: 700 15px var(--mono); }
+.aud-fix h4 { margin: 4px 0 6px; color: var(--forest); font: 650 19px/1.25 var(--serif); letter-spacing: -.02em; }
+.aud-fix p { margin: 0 0 8px; color: #4f5a53; font-size: 15px; }
+.aud-fix p:last-child { margin-bottom: 0; }
+.aud-fix .aud-diy { padding: 10px 12px; border-radius: 12px; background: #eef1ea; color: var(--ink); }
+.aud-fix .aud-lace b, .aud-fix .aud-diy b { color: var(--forest); }
+.aud-fix .aud-lace a { color: var(--wine); font-weight: 600; text-decoration: none; white-space: nowrap; }
+.aud-plan { display: grid; gap: 0; margin: 0 0 36px; padding: 0; list-style: none; border-left: 2px dashed var(--line); }
+.aud-plan li { position: relative; padding: 0 0 16px 22px; }
+.aud-plan li::before { content: ""; position: absolute; left: -7px; top: 5px; width: 12px; height: 12px; border-radius: 50%; background: var(--terra); }
+.aud-day { display: block; margin-bottom: 2px; color: var(--wine); font: 700 11px var(--mono); letter-spacing: .08em; text-transform: uppercase; }
+.aud-plan p { margin: 0; color: var(--ink); font-size: 15px; }
+.aud-cta { display: grid; grid-template-columns: 1fr auto; gap: 20px; align-items: center; padding: 28px; border-radius: 22px; background: var(--forest); color: var(--on-forest); }
+.v2 .aud-cta h3 { margin: 0 0 6px; color: #fff; font-size: 22px; }
+.aud-cta p { margin: 0; color: var(--on-forest-muted); font-size: 15px; }
+.aud-cta-actions { display: flex; flex-direction: column; align-items: stretch; gap: 8px; }
+.v2 .aud-cta .button.light { background: #fff; color: var(--wine); text-align: center; justify-content: center; }
+.aud-again { border: 0; background: none; color: var(--on-forest-muted); font: 13px var(--sans); text-decoration: underline; cursor: pointer; }
+.aud-promo { display: grid; grid-template-columns: 1fr auto; gap: 28px; align-items: center; padding: clamp(28px, 5vw, 48px); border: 1px solid var(--line); border-radius: 28px; background: var(--card); }
+.aud-promo .v2-h2 { margin-bottom: 10px; }
+.aud-promo p { margin: 0; color: #4f5a53; max-width: 560px; }
+@media (max-width: 720px) {
+  .aud-score { grid-template-columns: 1fr; justify-items: center; text-align: center; gap: 18px; }
+  .aud-areas { grid-template-columns: 1fr; }
+  .aud-cta, .aud-promo { grid-template-columns: 1fr; }
+  .aud-fix { grid-template-columns: 1fr; }
+  .aud-card { border-radius: 22px; }
+}

@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f3efe6">
+  <meta name="description" content="Auditoría gratis para negocios locales: 7 preguntas, 2 minutos. Descubre si tus clientes te encuentran en internet, qué arreglar primero y un plan de 7 días para hacerlo.">
+  <title>Auditoría gratis de tu negocio — Lace</title>
+  <link rel="icon" href="favicon.svg?v=2" type="image/svg+xml">
+  <link rel="icon" href="favicon.ico?v=2" sizes="any">
+  <link rel="apple-touch-icon" href="icon-180.png?v=2">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700;12..96,800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css?v=6">
+</head>
+<body class="v2">
+  <header class="topbar">
+    <div class="wrap nav">
+      <a class="brand" href="index.html" aria-label="Lace, inicio">Lace<span class="brand-dot">.</span></a>
+      <nav class="nav-links" id="navLinks" aria-label="Navegación principal">
+        <div class="nav-drop" id="navDrop">
+          <button class="nav-drop-btn" id="navDropBtn" type="button" aria-expanded="false" aria-controls="megaMenu">Servicios <span aria-hidden="true">▾</span></button>
+          <div class="mega" id="megaMenu">
+            <div class="mega-col">
+              <p class="mega-title">Que te encuentren</p>
+              <a href="webs.html"><b>Página web</b><span>Carta, horario y mapa, pensada para el móvil</span></a>
+              <a href="webs.html#en-directo"><b>Webs en directo</b><span>Mira una muestra real dentro de un móvil</span></a>
+              <a href="auditoria.html"><b>Auditoría gratis</b><span>7 preguntas: qué te falla y cómo arreglarlo</span></a>
+            </div>
+            <div class="mega-col">
+              <p class="mega-title">Que te escriban</p>
+              <a href="webs.html"><b>Botón de WhatsApp</b><span>El cliente te escribe o llama en un toque</span></a>
+              <a href="automatizaciones.html"><b>Respuestas automáticas</b><span>Horarios, precios y dudas de siempre</span></a>
+            </div>
+            <div class="mega-col">
+              <p class="mega-title">Que vuelvan</p>
+              <a href="automatizaciones.html"><b>Recordatorios de citas</b><span>Menos huecos perdidos en tu agenda</span></a>
+              <a href="automatizaciones.html"><b>Automatizaciones a medida</b><span>Una semana de prueba gratis</span></a>
+            </div>
+          </div>
+        </div>
+        <a href="trabajos.html">Trabajos</a>
+        <a href="index.html#como-trabajo">Cómo trabajo</a>
+        <a href="quienes-somos.html">Quiénes somos</a>
+        <a href="contacto.html">Contacto</a>
+      </nav>
+      <button class="menu-toggle" id="menuToggle" type="button" aria-controls="navLinks" aria-expanded="false" aria-label="Abrir menú"><span></span><span></span><span></span></button>
+      <a class="nav-cta" href="https://wa.me/34614443890?text=Hola%2C%20quiero%20una%20muestra%20gratis%20para%20mi%20negocio">Muestra gratis</a>
+    </div>
+    <div class="thread" aria-hidden="true"><i id="threadBar"></i></div>
+  </header>
+
+  <main>
+    <section class="aud-hero">
+      <div class="wrap aud-hero-inner">
+        <p class="tp-kicker">Auditoría gratis · 2 minutos</p>
+        <h1>¿Te encuentran tus clientes <em>cuando te buscan</em>?</h1>
+        <p class="lead">Responde 7 preguntas sobre tu negocio y te decimos qué está fallando, qué arreglar primero y cómo hacerlo tú mismo en una semana.</p>
+        <ul class="aud-facts">
+          <li><b>7</b><span>preguntas</span></li>
+          <li><b>2</b><span>minutos</span></li>
+          <li><b>7 días</b><span>de plan</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="aud-sec">
+      <div class="wrap">
+        <div class="aud-card" id="audCard">
+          <!-- Pantalla de inicio -->
+          <div class="aud-step is-on" id="audIntro">
+            <p class="aud-q-num">Antes de empezar</p>
+            <h2 class="aud-q">¿Cómo se llama tu negocio?</h2>
+            <p class="aud-help">Es opcional. Solo lo usamos para poner el nombre en tu resultado.</p>
+            <form id="audStart" class="aud-start" autocomplete="off">
+              <label class="sr-only" for="audName">Nombre de tu negocio</label>
+              <input id="audName" type="text" maxlength="80" placeholder="Ej.: Bar La Plaza">
+              <button class="button" type="submit">Empezar <span aria-hidden="true">→</span></button>
+            </form>
+            <p class="aud-private">No guardamos nada: el resultado se calcula en tu móvil.</p>
+          </div>
+
+          <!-- Preguntas (las pinta el script) -->
+          <div class="aud-step" id="audQuiz">
+            <div class="aud-progress" aria-hidden="true"><i id="audBar"></i></div>
+            <div class="aud-top">
+              <p class="aud-q-num" id="audNum">Pregunta 1 de 7</p>
+              <button class="aud-back" id="audBack" type="button">← Atrás</button>
+            </div>
+            <h2 class="aud-q" id="audQ"></h2>
+            <p class="aud-help" id="audHelp"></p>
+            <div class="aud-opts" id="audOpts" role="radiogroup" aria-labelledby="audQ"></div>
+          </div>
+
+          <!-- Resultado -->
+          <div class="aud-step" id="audResult" aria-live="polite">
+            <div class="aud-score">
+              <div class="aud-ring" id="audRing" style="--p:0"><b id="audPts">0</b><span>/100</span></div>
+              <div>
+                <p class="aud-q-num" id="audFor">Tu resultado</p>
+                <h2 class="aud-q" id="audVerdict"></h2>
+                <p class="aud-help" id="audVerdictTxt"></p>
+              </div>
+            </div>
+
+            <div class="aud-areas" id="audAreas"></div>
+
+            <h3 class="aud-h3">Lo que arreglaríamos primero</h3>
+            <div class="aud-fixes" id="audFixes"></div>
+
+            <h3 class="aud-h3">Tu plan de 7 días</h3>
+            <ol class="aud-plan" id="audPlan"></ol>
+
+            <div class="aud-cta">
+              <div>
+                <h3>¿Prefieres que te lo hagamos nosotros?</h3>
+                <p>Mándanos tu resultado por WhatsApp y te preparamos una muestra gratis con tu negocio. Sin compromiso: la ves antes de decidir nada.</p>
+              </div>
+              <div class="aud-cta-actions">
+                <a class="button light" id="audWa" href="https://wa.me/34614443890" target="_blank" rel="noopener">Enviar mi resultado por WhatsApp</a>
+                <button class="aud-again" id="audAgain" type="button">Repetir la auditoría</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="mega-footer">
+    <div class="wrap mf-grid">
+      <div class="mf-brand"><a class="brand" href="index.html">Lace<span class="brand-dot">.</span></a><p>Webs y automatizaciones para negocios locales.</p><a class="button" href="https://wa.me/34614443890?text=Hola%2C%20quiero%20una%20muestra%20gratis%20para%20mi%20negocio">Muestra gratis</a></div>
+      <div><p class="mf-title">Que te encuentren</p><a href="webs.html">Página web</a><a href="webs.html#en-directo">Webs en directo</a><a href="auditoria.html">Auditoría gratis</a></div>
+      <div><p class="mf-title">Que te escriban y vuelvan</p><a href="automatizaciones.html">Respuestas automáticas</a><a href="automatizaciones.html">Recordatorios de citas</a><a href="automatizaciones.html">Automatizaciones a medida</a></div>
+      <div><p class="mf-title">Lace</p><a href="trabajos.html">Trabajos</a><a href="quienes-somos.html">Quiénes somos</a><a href="index.html#como-trabajo">Cómo trabajo</a><a href="contacto.html">Contacto</a></div>
+      <div><p class="mf-title">Contacto</p><span>WhatsApp: 614 44 38 90</span><span>lacespaindev@gmail.com</span><span>Madrid</span></div>
+    </div>
+    <div class="wrap mf-bottom"><span>© <span id="year">2026</span> Lace. Todos los derechos reservados.</span></div>
+  </footer>
+  <a class="wa-float" id="waFloat" href="https://wa.me/34614443890?text=Hola%2C%20quiero%20hablar%20sobre%20mi%20negocio" aria-label="Escribir a Lace por WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2c-1.5 0-3-.4-4.3-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.2.3-.9.9-.9 2.2s.9 2.5 1 2.7c.1.2 1.8 2.8 4.4 3.9 1.6.7 2.3.8 3.1.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.5-.3Z"/></svg><span>Escríbeme</span></a>
+  <script src="site.js?v=5"></script>
+  <script src="auditoria.js?v=1"></script>
+</body>
+</html>
