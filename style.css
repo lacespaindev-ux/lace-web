@@ -627,6 +627,7 @@ body.v2 { background: var(--paper); }
 .cb-body b { font: 700 32px/1 var(--display); }
 .cb-body span { font-size: 13px; opacity: .8; }
 .case blockquote { margin: 0 0 12px; color: var(--forest); font: 650 clamp(20px, 2.2vw, 26px)/1.3 var(--display); letter-spacing: -.02em; }
+.case-desc { margin: 0 0 18px; color: var(--forest); font: 600 clamp(18px, 2vw, 22px)/1.4 var(--display); letter-spacing: -.015em; }
 .case-by { margin: 0 0 18px; color: var(--muted); font-size: 14px; }
 .case-stats { display: flex; flex-wrap: wrap; gap: 24px; margin: 0 0 22px; padding: 18px 0 0; border-top: 1px solid var(--line); list-style: none; }
 .case-stats b { display: block; color: var(--accent); font: 800 28px/1 var(--display); }
